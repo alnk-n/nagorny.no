@@ -1,0 +1,232 @@
+/* site.css — layout that wraps SRCL components into a portfolio shell.
+   The SRCL components themselves bring their own atomic styling via CSS
+   modules; this file only adds the page-level grid, the mobile drawer, and
+   a few content scaffolding helpers we don't get out-of-the-box. */
+
+.site {
+  display: grid;
+  grid-template-columns: minmax(30ch, 36ch) 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.site-nav { grid-column: 1 / -1; }
+
+.site-aside {
+  grid-row: 2;
+  padding: 1ch 1ch 2ch;
+  border-right: 2px solid var(--theme-text);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  background: var(--theme-background);
+}
+
+.site-aside-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1ch;
+}
+
+.site-aside h3 {
+  font-size: var(--font-size);
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: calc(var(--theme-line-height-base) * 0.5rem) 0 0;
+  letter-spacing: 1px;
+}
+
+.site-main {
+  grid-row: 2;
+  padding: calc(var(--theme-line-height-base) * 1rem) 2ch 4rem;
+  min-width: 0;
+}
+
+.site-main > :is(section, article) + :is(section, article),
+.site-main .stack > * + * {
+  margin-top: calc(var(--theme-line-height-base) * 1.5rem);
+}
+
+.srcl-logo-like.site-menu-btn { display: none; }
+.site-aside-close {
+  display: none;
+  background: var(--theme-border);
+  color: var(--theme-text);
+  font: inherit;
+  font-family: var(--font-family-mono);
+  border: 0;
+  outline: 0;
+  padding: 0 1ch;
+  cursor: pointer;
+  line-height: calc(var(--theme-line-height-base) * 1rem);
+}
+.site-aside-close:hover,
+.site-aside-close:focus { background: var(--theme-focused-foreground); }
+
+@media (max-width: 800px) {
+  .site { grid-template-columns: 1fr; }
+  .site-aside {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    height: 100vh;
+    width: min(100vw, 40ch);
+    transform: translateX(-100%);
+    transition: transform 200ms ease;
+    border-right: 0;
+    box-shadow: none;
+  }
+  .site-aside.open {
+    transform: translateX(0);
+    border-right: 2px solid var(--theme-text);
+    box-shadow: 2ch 0 0 var(--theme-window-shadow);
+  }
+  .srcl-logo-like.site-menu-btn { display: inline-flex; }
+  .site-aside-close { display: inline-flex; }
+
+  /* Highlight the mobile menu trigger so it reads as the primary action. */
+  .srcl-logo-like.site-menu-btn,
+  .srcl-logo-like.site-menu-btn:hover,
+  .srcl-logo-like.site-menu-btn:focus {
+    background: var(--theme-focused-foreground);
+    color: var(--theme-text);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+  .srcl-logo-like.site-menu-btn:active { opacity: 0.85; }
+
+  /* Hide the tint cycler — saves room for the theme toggle + menu trigger. */
+  .site-tint-btn { display: none; }
+
+  .site-main { padding: calc(var(--theme-line-height-base) * 1rem) 1.5ch 4rem; }
+  .site-backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--theme-overlay);
+    z-index: 20;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+  }
+  .site-backdrop.open { opacity: 1; pointer-events: auto; }
+}
+
+/* page head row (filename + meta) */
+.page-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 1ch;
+  padding-bottom: calc(var(--theme-line-height-base) * 0.5rem);
+}
+.page-head h1 {
+  font-size: var(--font-size);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.page-head .meta {
+  color: var(--theme-text);
+  opacity: 0.6;
+  font-size: var(--font-size);
+}
+
+.hero-ascii {
+  white-space: pre;
+  overflow: hidden;
+  scrollbar-width: none;
+  margin-bottom: calc(var(--theme-line-height-base) * 1rem);
+  /* Scale down so the 60-char art fits narrow screens without scroll. */
+  font-size: clamp(0.45rem, 2.4vw, 1rem);
+  line-height: 1.15;
+}
+.hero-ascii::-webkit-scrollbar { display: none; }
+
+.kv { display: grid; grid-template-columns: minmax(0, 16ch) 1fr; column-gap: 2ch; row-gap: 0; }
+.kv .k { opacity: 0.7; }
+
+.proj-list { display: grid; gap: calc(var(--theme-line-height-base) * 1rem); margin-top: calc(var(--theme-line-height-base) * 0.5rem); }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 1ch; margin: 0.5ch 0; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 1ch; margin-top: 0.75rem; }
+.btn-row > * { flex: 0 1 auto; text-decoration: none; }
+.bullet { display: inline-block; width: 1ch; }
+
+.quote {
+  padding: 0 0 0 2ch;
+  box-shadow: inset 2px 0 0 0 var(--theme-text);
+  margin: calc(var(--theme-line-height-base) * 1rem) 0;
+  color: var(--theme-text);
+}
+
+.shortcuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.aside-hint {
+  opacity: 0.6;
+  font-size: calc(var(--font-size) * 0.9);
+  margin-top: 1.25rem;
+}
+
+/* ── button-styled anchors (so <a> can look like SRCL's <Button>) ─────── */
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: calc(var(--theme-line-height-base) * 2em);
+  min-height: calc(var(--theme-line-height-base) * (var(--font-size) * 2));
+  padding: 0 2ch;
+  text-align: center;
+  transition: 200ms ease all;
+  cursor: pointer;
+  text-decoration: none;
+  border: 0;
+}
+.btn-primary {
+  background: var(--theme-button);
+  color: var(--theme-button-text);
+}
+.btn-secondary {
+  background: var(--theme-background);
+  color: var(--theme-text);
+  box-shadow: inset 0 0 0 1px var(--theme-border);
+}
+.btn-primary:hover,   .btn-primary:focus,
+.btn-secondary:hover, .btn-secondary:focus {
+  background: var(--theme-focused-foreground);
+  color: var(--theme-text);
+  box-shadow: none;
+}
+
+/* ── nav buttons styled like Navigation's logo (mirrors the CSS-module) ─ */
+.srcl-logo-like {
+  flex-shrink: 0;
+  padding: 0 1ch;
+  display: inline-flex;
+  color: var(--theme-text);
+  background: var(--theme-border);
+  text-decoration: none;
+  border: 0;
+  outline: 0;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size);
+  cursor: pointer;
+  line-height: inherit;
+}
+.srcl-logo-like:hover,
+.srcl-logo-like:focus,
+.srcl-logo-like:active {
+  background: var(--theme-focused-foreground);
+  color: var(--theme-text);
+}
