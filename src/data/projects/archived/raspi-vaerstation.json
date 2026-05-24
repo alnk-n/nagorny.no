@@ -1,0 +1,17 @@
+{
+  "id": "raspi-vaerstation",
+  "name": "raspi-vaerstation",
+  "stack": "Rust · Raspberry Pi · e-ink",
+  "year": "2025",
+  "status": "ARCHIVED",
+  "note": "DHT22-sensor på en Pi Zero med e-ink display — viser temp/fukt i kjelleren.",
+  "body": "Bygget over en helg etter at jeg hadde mistanke om at kjelleren var fuktigere enn antatt. Spoiler: den var det.",
+  "arch": "DHT22  →  rust-gpio  →  e-ink (2.13\" Waveshare)",
+  "learnings": [
+    "GPIO på Rust er overkill for prosjekter som dette, men det var læringsmål nr. 1.",
+    "E-ink refresh på under 60s = må optimaliseres for ikke å brenne ut displayet."
+  ],
+  "links": {
+    "repo": "https://github.com/jonaseriksen/raspi-vaerstation"
+  }
+}

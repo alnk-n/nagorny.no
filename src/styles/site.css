@@ -150,6 +150,40 @@
 .kv { display: grid; grid-template-columns: minmax(0, 16ch) 1fr; column-gap: 2ch; row-gap: 0; }
 .kv .k { opacity: 0.7; }
 
+.resume-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 1.5ch;
+  border-left: 2px solid var(--theme-border);
+}
+.resume-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0 0.75rem 1.5ch;
+  position: relative;
+}
+.resume-entry::before {
+  content: '';
+  position: absolute;
+  left: -0.55ch;
+  top: 0.6rem;
+  width: 0.6ch;
+  height: 0.6ch;
+  background: var(--theme-text);
+}
+.resume-entry .k {
+  opacity: 0.55;
+  font-size: calc(var(--font-size) * 0.85);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .resume-entry + .resume-entry { border-top: 1px solid var(--theme-border); }
+}
+
 .proj-list { display: grid; gap: calc(var(--theme-line-height-base) * 1rem); margin-top: calc(var(--theme-line-height-base) * 0.5rem); }
 
 .tag-row { display: flex; flex-wrap: wrap; gap: 1ch; margin: 0.5ch 0; }

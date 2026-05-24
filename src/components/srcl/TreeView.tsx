@@ -39,12 +39,19 @@ const TreeView: React.FC<TreeViewProps> = ({
   containsActive = false,
 }) => {
   const [show, setShow] = React.useState<boolean>(defaultValue);
+  const rowRef = React.useRef<HTMLDivElement>(null);
 
   // Auto-expand whenever this folder is active or contains the active page,
   // so the user never has to manually open the tree to see where they are.
   React.useEffect(() => {
     if (!isFile && (active || containsActive)) setShow(true);
   }, [active, containsActive, isFile]);
+
+  // Keep browser focus in sync with the active item so arrow-key navigation
+  // never leaves a stale :focus-visible highlight on a no-longer-active item.
+  React.useEffect(() => {
+    if (active) rowRef.current?.focus({ preventScroll: true });
+  }, [active]);
 
   // Row click: files navigate; folders navigate AND ensure expanded.
   const handleRowClick = (): void => {
@@ -71,6 +78,7 @@ const TreeView: React.FC<TreeViewProps> = ({
   return (
     <div className={styles.root} style={style}>
       <div
+        ref={rowRef}
         tabIndex={0}
         role={isFile ? 'link' : 'button'}
         onClick={handleRowClick}

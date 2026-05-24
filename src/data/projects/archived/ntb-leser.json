@@ -1,0 +1,17 @@
+{
+  "id": "ntb-leser",
+  "name": "ntb-leser",
+  "stack": "Python · feedparser · curses",
+  "year": "2026",
+  "status": "ACTIVE",
+  "note": "RSS-leser i terminalen som leser NTB, NRK, BBC og Hacker News i ett vindu.",
+  "body": "Et lite curses-program. j/k for å bla, Enter for å åpne i $BROWSER, m for å markere lest. Lagrer state som JSON i ~/.config/ntb-leser.",
+  "arch": "feedparser  →  state.json  →  curses TUI",
+  "learnings": [
+    "feedparser har overlevd 20+ år av en grunn — det taklar all den rare RSS-en.",
+    "curses er fortsatt det enkleste verktøyet for å lage et TUI med statlig grensesnitt."
+  ],
+  "links": {
+    "repo": "https://github.com/jonaseriksen/ntb-leser"
+  }
+}

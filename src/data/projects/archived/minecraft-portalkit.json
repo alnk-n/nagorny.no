@@ -1,0 +1,17 @@
+{
+  "id": "minecraft-portalkit",
+  "name": "minecraft-portalkit",
+  "stack": "Java · Spigot API · MySQL",
+  "year": "2025",
+  "status": "MAINTAINED",
+  "note": "Plugin for klassens MC-server — definerbare portaler mellom dimensjoner og worlds.",
+  "body": "Klassen vår har en Minecraft-server jeg styrer. Dette plugin-et lar deg sette opp navngitte portaler som virker uavhengig av Nether-koordinater.",
+  "arch": "Spigot events  →  Portal manager  →  MySQL (config)",
+  "learnings": [
+    "Spigot API er overraskende stabil — kode fra 2018 funker fortsatt.",
+    "Mest tid gikk på å forklare lærere hvordan man laster opp en .jar-fil."
+  ],
+  "links": {
+    "repo": "https://github.com/jonaseriksen/minecraft-portalkit"
+  }
+}

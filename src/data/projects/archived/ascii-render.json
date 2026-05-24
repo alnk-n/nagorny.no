@@ -1,0 +1,17 @@
+{
+  "id": "ascii-render",
+  "name": "ascii-render",
+  "stack": "TypeScript · ffmpeg",
+  "year": "2024",
+  "status": "ARCHIVED",
+  "note": "Pipeline som tar en MP4 og rendrer den ut som Braille-tegn i terminalen.",
+  "body": "Inspirert av cmatrix og diverse ASCII-konvertere på YouTube. Tar inn en video, sender hver frame gjennom ffmpeg, og mapper pikselverdier til Unicode-Braille (8 pixler per glyph).",
+  "arch": "mp4  →  ffmpeg frames  →  luminance map  →  braille glyph grid  →  ANSI stdout",
+  "learnings": [
+    "Braille-rommet (U+2800–U+28FF) gir 8 pixler per tegn — dobbelt så høy oppløsning som vanlig ASCII.",
+    "ffmpeg er nesten mer kraftfullt enn man rekker å sette pris på."
+  ],
+  "links": {
+    "repo": "https://github.com/jonaseriksen/ascii-render"
+  }
+}
