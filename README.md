@@ -4,7 +4,7 @@ Personal website hosted on GitHub Pages with a custom domain.
 
 ## Stack
 
-- **Hosting**: GitHub Pages (`nagorny.no` custom domain via CNAME)
+- **Hosting**: Cloudflare Pages (`nagorny.no` custom domain via CNAME)
 - **Bundler**: [Vite](https://vitejs.dev/) with React + TypeScript
 - **UI Library**: [SRCL](https://github.com/internet-development/www-sacred) - React component library with a TUI aesthetic
 
