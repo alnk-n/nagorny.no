@@ -39,7 +39,7 @@ export interface Project {
   learnings: string[];
   learnings_en?: string[];
   links: { live?: string; repo?: string };
-  lang?: 'no' | 'en';
+  lang?: "no" | "en";
 }
 
 export type ContentBlock =
@@ -60,7 +60,7 @@ export interface Post {
   body?: ContentBlock[];
   body_en?: ContentBlock[];
   readTime?: number;
-  lang?: 'no' | 'en';
+  lang?: "no" | "en";
 }
 
 export const IDENTITY = {
@@ -70,15 +70,16 @@ export const IDENTITY = {
   email: "alan@nagorny.no",
   github: "@alnk-n",
   available: "Starter som IT-lærling høsten 2026",
+  available_en: "Starting as an IT apprentice in autumn 2026",
 };
 
 const projectFiles = import.meta.glob<Project>("./data/projects/*.json", {
   eager: true,
   import: "default",
 });
-export const PROJECTS: Project[] = (Object.values(projectFiles) as Project[]).sort(
-  (a, b) => b.year.localeCompare(a.year) || a.id.localeCompare(b.id),
-);
+export const PROJECTS: Project[] = (
+  Object.values(projectFiles) as Project[]
+).sort((a, b) => b.year.localeCompare(a.year) || a.id.localeCompare(b.id));
 
 const writingFiles = import.meta.glob<Post>("./data/writing/*.json", {
   eager: true,
@@ -89,11 +90,36 @@ export const WRITING: Post[] = (Object.values(writingFiles) as Post[]).sort(
 );
 
 export const RESUME = [
-  { period: "okt.2025-nå", period_en: "oct.2025-present", what: "Diverse utplasseringer ved Garnes Data", what_en: "Various placements at Garnes Data" },
-  { period: "nov.2025", period_en: "nov.2025", what: "1 uke ved F24 - Webutvikling", what_en: "1 week at F24 - Web development" },
-  { period: "mar.2025", period_en: "mar.2025", what: "1 uke ved Charlottenlund VGS.", what_en: "1 week at Charlottenlund VGS." },
-  { period: "feb.2025", period_en: "feb.2025", what: "1 uke ved Charlottenlund VGS.", what_en: "1 week at Charlottenlund VGS." },
-  { period: "jul.2023-sep.2022", period_en: "jul.2023-sep.2022", what: "Trøndelag Lakkering og Snekkering", what_en: "Trøndelag Lacquering and Carpentry" },
+  {
+    period: "okt.2025-nå",
+    period_en: "oct.2025-present",
+    what: "Diverse utplasseringer ved Garnes Data",
+    what_en: "Various placements at Garnes Data",
+  },
+  {
+    period: "nov.2025",
+    period_en: "nov.2025",
+    what: "1 uke ved F24 - Webutvikling",
+    what_en: "1 week at F24 - Web development",
+  },
+  {
+    period: "mar.2025",
+    period_en: "mar.2025",
+    what: "1 uke ved Charlottenlund VGS.",
+    what_en: "1 week at Charlottenlund VGS.",
+  },
+  {
+    period: "feb.2025",
+    period_en: "feb.2025",
+    what: "1 uke ved Charlottenlund VGS.",
+    what_en: "1 week at Charlottenlund VGS.",
+  },
+  {
+    period: "jul.2023-sep.2022",
+    period_en: "jul.2023-sep.2022",
+    what: "Trøndelag Lakkering og Snekkering",
+    what_en: "Trøndelag Lacquering and Carpentry",
+  },
 ];
 
 export const SKILLS = [
@@ -110,7 +136,7 @@ export const SKILLS = [
   {
     group: "maskinvare",
     group_en: "hardware",
-    items: ["Kabelterminering", "Racking", "Lodding", "3D-print"],
+    items: ["Kabelterminering", "Racking", "Soldering", "3D-print"],
   },
   {
     group: "andre felt",

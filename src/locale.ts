@@ -71,6 +71,9 @@ type UIStrings = {
   lang_no_only: string;
   lang_en_only: string;
 
+  // PageContact
+  contact_send_email: string;
+
   // Page 404
   page404_hint: string;
 };
@@ -118,6 +121,8 @@ const UI: Record<Locale, UIStrings> = {
     lang_no_only: 'Kun tilgjengelig på norsk',
     lang_en_only: 'Kun tilgjengelig på engelsk',
 
+    contact_send_email: 'Send e-post →',
+
     page404_hint: 'Prøv ~/readme.md, eller bruk sidepanelet.',
   },
 
@@ -162,6 +167,8 @@ const UI: Record<Locale, UIStrings> = {
 
     lang_no_only: 'Only available in Norwegian',
     lang_en_only: 'Only available in English',
+
+    contact_send_email: 'Send email →',
 
     page404_hint: 'Try ~/readme.md, or use the sidebar.',
   },

@@ -70,12 +70,14 @@ export function PageReadme() {
   const time = useClock();
   const t = useT();
   const { locale } = useLocale();
-  const aboutLink = locale === "no"
-    ? "hvis du vil vite hvem jeg er, eller"
-    : "if you want to know who I am, or";
-  const projectsLink = locale === "no"
-    ? "hvis du heller vil se hva jeg holder på med i fritiden min."
-    : "to see what I do in my free time.";
+  const aboutLink =
+    locale === "no"
+      ? "hvis du vil vite hvem jeg er, eller"
+      : "if you want to know who I am, or";
+  const projectsLink =
+    locale === "no"
+      ? "hvis du heller vil se hva jeg holder på med i fritiden min."
+      : "to see what I do in my free time.";
   return (
     <>
       <div className="page-head">
@@ -111,10 +113,8 @@ export function PageReadme() {
 
       <Card title={t.readme_start_card} mode="left">
         <Text>
-          {t.readme_start_text} <Link to="/about.md">about.md</Link>{" "}
-          {aboutLink}{" "}
-          <Link to="/projects/">projects/</Link>{" "}
-          {projectsLink}
+          {t.readme_start_text} <Link to="/about.md">about.md</Link> {aboutLink}{" "}
+          <Link to="/projects/">projects/</Link> {projectsLink}
         </Text>
         <div className="btn-row">
           <Link className="btn-primary" to="/about.md">
@@ -145,13 +145,11 @@ export function PageAbout() {
 
       <Window>
         <Text>
-          Jeg heter <b>{IDENTITY.name}</b>. {t.about_bio}
+          <b>{IDENTITY.name}</b>. {t.about_bio}
         </Text>
-        <Text style={{ marginTop: "1rem" }}>
-          {t.about_hobbies}
-        </Text>
+        <Text style={{ marginTop: "1rem" }}>{t.about_hobbies}</Text>
         <Text style={{ marginTop: "1rem", opacity: 0.75 }}>
-          {IDENTITY.available} · {t.about_availability}
+          {loc(locale, IDENTITY.available, IDENTITY.available_en)} · {t.about_availability}
         </Text>
       </Window>
 
@@ -181,12 +179,17 @@ export function PageAbout() {
       <Card title={t.about_goals_card} mode="left">
         <ul style={{ paddingLeft: 0, listStyle: "none" }}>
           {GOALS.map((g) => (
-            <li key={g.text} style={{ display: "flex", gap: "1ch", alignItems: "baseline" }}>
+            <li
+              key={g.text}
+              style={{ display: "flex", gap: "1ch", alignItems: "baseline" }}
+            >
               <span className="bullet">▪</span>
               <span>
                 {loc(locale, g.text, g.text_en)}
                 {locale === "en" && !g.text_en && (
-                  <Badge style={{ fontSize: "0.75em", marginLeft: "0.5ch" }}>(NO)</Badge>
+                  <Badge style={{ fontSize: "0.75em", marginLeft: "0.5ch" }}>
+                    (NO)
+                  </Badge>
                 )}
               </span>
             </li>
@@ -224,7 +227,9 @@ export function PageNow() {
             <span style={{ opacity: 0.6 }}>·</span>{" "}
             {loc(locale, n.text, n.text_en)}
             {locale === "en" && !n.text_en && (
-              <Badge style={{ fontSize: "0.75em", marginLeft: "0.5ch" }}>(NO)</Badge>
+              <Badge style={{ fontSize: "0.75em", marginLeft: "0.5ch" }}>
+                (NO)
+              </Badge>
             )}
           </Text>
         ))}
@@ -275,9 +280,7 @@ export function PageResume() {
       </Card>
 
       <Card title={t.resume_references} mode="left">
-        <Text style={{ opacity: 0.7 }}>
-          {t.resume_refs_text}
-        </Text>
+        <Text style={{ opacity: 0.7 }}>{t.resume_refs_text}</Text>
       </Card>
     </>
   );
@@ -285,6 +288,7 @@ export function PageResume() {
 
 // ── /contact.conf ─────────────────────────────────────────────────────────
 export function PageContact() {
+  const t = useT();
   return (
     <>
       <div className="page-head">
@@ -304,7 +308,7 @@ github   = ${IDENTITY.github}`}
         </CodeBlock>
         <div className="btn-row">
           <a className="btn-primary" href={`mailto:${IDENTITY.email}`}>
-            Send e-post →
+            {t.contact_send_email}
           </a>
           <a
             className="btn-secondary"
@@ -337,7 +341,9 @@ export function PageProjectsIndex() {
               <Badge>{p.status}</Badge>
             </div>
             <Text style={{ opacity: 0.75 }}>{p.stack}</Text>
-            <Text style={{ marginTop: "0.5rem" }}>{loc(locale, p.note, p.note_en)}</Text>
+            <Text style={{ marginTop: "0.5rem" }}>
+              {loc(locale, p.note, p.note_en)}
+            </Text>
             <div className="btn-row">
               <Link className="btn-secondary" to={`/projects/${p.id}.md`}>
                 Les mer →
@@ -360,8 +366,22 @@ export function PageProjectDetail({ id }: { id: string }) {
     <>
       <BreadCrumbs
         items={[
-          { name: "~", url: "/", onClick: (e) => { e.preventDefault(); navigate("/"); } },
-          { name: "projects", url: "/projects/", onClick: (e) => { e.preventDefault(); navigate("/projects/"); } },
+          {
+            name: "~",
+            url: "/",
+            onClick: (e) => {
+              e.preventDefault();
+              navigate("/");
+            },
+          },
+          {
+            name: "projects",
+            url: "/projects/",
+            onClick: (e) => {
+              e.preventDefault();
+              navigate("/projects/");
+            },
+          },
           { name: `${p.id}.md`, url: `/projects/${p.id}.md` },
         ]}
       />
@@ -455,7 +475,10 @@ export function PageWritingIndex() {
         <div>
           {WRITING.map((w) => (
             <div key={w.slug} style={{ marginBottom: "0.5rem" }}>
-              <ActionListItem icon=">" onClick={() => navigate(`/writing/${w.slug}.md`)}>
+              <ActionListItem
+                icon=">"
+                onClick={() => navigate(`/writing/${w.slug}.md`)}
+              >
                 <span
                   style={{
                     display: "flex",
@@ -470,8 +493,17 @@ export function PageWritingIndex() {
                   >
                     {w.date}
                   </span>
-                  <span style={{ flex: "1 1 auto" }}>{loc(locale, w.title, w.title_en)}</span>
-                  {w.tags.map((t) => <Badge key={t} style={{ background: "var(--theme-background)" }}>{t}</Badge>)}
+                  <span style={{ flex: "1 1 auto" }}>
+                    {loc(locale, w.title, w.title_en)}
+                  </span>
+                  {w.tags.map((t) => (
+                    <Badge
+                      key={t}
+                      style={{ background: "var(--theme-background)" }}
+                    >
+                      {t}
+                    </Badge>
+                  ))}
                 </span>
               </ActionListItem>
               <Text
@@ -515,7 +547,9 @@ function renderBlock(block: ContentBlock, i: number) {
             style={{ maxWidth: "100%", display: "block" }}
           />
           {block.caption && (
-            <Text style={{ opacity: 0.6, marginTop: "0.25rem", fontSize: "0.85em" }}>
+            <Text
+              style={{ opacity: 0.6, marginTop: "0.25rem", fontSize: "0.85em" }}
+            >
               {block.caption}
             </Text>
           )}
@@ -554,20 +588,40 @@ export function PageWritingDetail({ slug }: { slug: string }) {
     <>
       <BreadCrumbs
         items={[
-          { name: "~", url: "/", onClick: (e) => { e.preventDefault(); navigate("/"); } },
-          { name: "writing", url: "/writing/", onClick: (e) => { e.preventDefault(); navigate("/writing/"); } },
+          {
+            name: "~",
+            url: "/",
+            onClick: (e) => {
+              e.preventDefault();
+              navigate("/");
+            },
+          },
+          {
+            name: "writing",
+            url: "/writing/",
+            onClick: (e) => {
+              e.preventDefault();
+              navigate("/writing/");
+            },
+          },
           { name: `${w.slug}.md`, url: `/writing/${w.slug}.md` },
         ]}
       />
 
       <div className="page-head">
         <h1>{loc(locale, w.title, w.title_en)}</h1>
-        <span className="meta">{w.date} · {readTime}</span>
+        <span className="meta">
+          {w.date} · {readTime}
+        </span>
       </div>
 
       <Window>
         <div className="tag-row" style={{ marginBottom: "0.75rem" }}>
-          {w.tags.map((tag) => <Badge key={tag} style={{ background: "var(--theme-background)" }}>{tag}</Badge>)}
+          {w.tags.map((tag) => (
+            <Badge key={tag} style={{ background: "var(--theme-background)" }}>
+              {tag}
+            </Badge>
+          ))}
           {langMismatch && (
             <Badge>{w.lang === "no" ? t.lang_no_only : t.lang_en_only}</Badge>
           )}
@@ -605,7 +659,14 @@ export function Page404({ path }: { path: string }) {
       <div style={{ height: "0.75rem" }} />
       <Text style={{ opacity: 0.6 }}>
         {t.page404_hint.split("~/readme.md").map((part, i) =>
-          i === 0 ? part : <><Link to="/">~/readme.md</Link>{part}</>
+          i === 0 ? (
+            part
+          ) : (
+            <>
+              <Link to="/">~/readme.md</Link>
+              {part}
+            </>
+          ),
         )}
       </Text>
     </Window>
