@@ -412,7 +412,7 @@ export function PageWritingIndex() {
 
       <Window>
         <Text style={{ opacity: 0.7, marginBottom: "1rem" }}>
-          Notater og småtekster — ofte uferdige. RSS er på vei.
+          Ofte uferdige notater og småtekster.
         </Text>
         <div>
           {WRITING.map((w) => (
