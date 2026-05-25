@@ -437,7 +437,7 @@ export function PageWritingIndex() {
                     {w.date}
                   </span>
                   <span style={{ flex: "1 1 auto" }}>{w.title}</span>
-                  {w.tags.map((t) => <Badge key={t}>{t}</Badge>)}
+                  {w.tags.map((t) => <Badge key={t} style={{ background: "var(--theme-background)" }}>{t}</Badge>)}
                 </span>
               </ActionListItem>
               <Text
