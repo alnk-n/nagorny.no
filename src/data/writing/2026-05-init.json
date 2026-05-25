@@ -2,34 +2,34 @@
   "slug": "2026-05-init",
   "date": "2026-05-25",
   "title": "En spennende start på nettsiden min",
-  "tags": ["webdev", "test"],
-  "lede": "Spoiler: lazy.nvim, telescope, og litt selvbedrag.",
-  "readTime": 5,
+  "tags": ["webdev", "personal", "announcement"],
+  "lede": "Endelig har jeg fått nytte ut av domenet mitt.",
+  "readTime": 3,
   "body": [
     {
       "type": "text",
-      "content": "Jeg har brukt VS Code siden jeg startet å kode. Det er greit. Det funker. Men etter hvert begynte det å kjennes tungt — mange utvidelser, treg oppstart, og alltid noe som drar meg ut av fokus."
+      "content": "Jeg kjøpte dette domenet for noen måneder siden, med ambisiøse planer om å lage en blogg og dele mine tanker og erfaringer innen webutvikling. Nå har jeg endelig tatt det første skrittet og publisert nettsiden min."
     },
     {
       "type": "text",
-      "content": "Neovim er annerledes. Oppstartstiden er under 100 ms. Tastaturet er alt. Det tar tid å lære, men når det klikker, er det vanskelig å gå tilbake."
+      "content": "I tillegg vil jeg bruke denne plattformen til å dokumentere mine personlige prosjekter, dele tips og triks, og kanskje til og med skrive noen tutorials. Jeg håper at dette kan være en ressurs for andre som er interessert i IT."
     },
     {
       "type": "divider"
     },
     {
       "type": "text",
-      "content": "Pluginene jeg endte opp med:"
+      "content": "Stacken jeg endre opp med:"
     },
     {
       "type": "code",
-      "lang": "lua",
-      "content": "-- ~/.config/nvim/lua/plugins.lua\nreturn {\n  { \"folke/lazy.nvim\" },\n  { \"nvim-telescope/telescope.nvim\" },\n  { \"neovim/nvim-lspconfig\" },\n  { \"nvim-treesitter/nvim-treesitter\", build = \":TSUpdate\" },\n}"
+      "lang": "json",
+      "content": "{\n  \"framework\": \"React 18\",\n  \"language\": \"TypeScript\",\n  \"bundler\": \"Vite\"\n}"
     },
     {
       "type": "quote",
-      "content": "Redaktøren din skal hjelpe deg å tenke, ikke tenke for deg.",
-      "attribution": "notat til meg selv"
+      "content": "Victorious warriors win first and then go to war, while defeated warriors go to war first and then seek to win.",
+      "attribution": "sun tzu, art of war"
     }
   ]
 }
