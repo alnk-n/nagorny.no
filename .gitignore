@@ -4,3 +4,4 @@ node_modules
 *.log
 src\data\projects\archived
 src\data\writing\archived
+CLAUDE.md
