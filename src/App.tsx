@@ -68,6 +68,36 @@ function App(): React.ReactElement {
 
   const route = parseRoute(path);
 
+  React.useEffect(() => {
+    const symbols: Record<string, string> = {
+      readme:           '~',
+      about:            '?',
+      now:              '●',
+      resume:           '≡',
+      contact:          '@',
+      'projects-index': '{',
+      project:          '{',
+      'writing-index':  '#',
+      post:             '#',
+      'not-found':      '?',
+    };
+    const tintColors: Record<string, string> = {
+      '':             '#8a6e00',
+      'tint-yellow':  '#8a6e00',
+      'tint-green':   '#1f7a27',
+      'tint-blue':    '#0047ff',
+      'tint-pink':    '#b5006f',
+    };
+    const symbol = symbols[route.kind] ?? '~';
+    const color  = tintColors[tint] ?? '#e4f221';
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="7" fill="${color}"/><text x="16" y="16" text-anchor="middle" dominant-baseline="middle" font-family="monospace" font-weight="600" font-size="22" fill="#ffffff">${symbol}</text></svg>`;
+    const link = document.querySelector<HTMLLinkElement>('link[rel="icon"]');
+    if (link) {
+      link.type = 'image/svg+xml';
+      link.href = 'data:image/svg+xml,' + encodeURIComponent(svg);
+    }
+  }, [route.kind, tint]);
+
   let page: React.ReactNode;
   switch (route.kind) {
     case 'readme':          page = <PageReadme />; break;
