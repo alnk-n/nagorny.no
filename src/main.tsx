@@ -5,6 +5,7 @@ import './styles/global-fonts.css';
 import './styles/global.css';
 import './styles/site.css';
 
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
 const root = document.getElementById('root');
@@ -19,7 +20,9 @@ if (root) {
 
   ReactDOM.createRoot(root).render(
     <React.StrictMode>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
   );
 }

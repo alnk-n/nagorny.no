@@ -5,6 +5,7 @@ import * as React from 'react';
 interface BreadCrumbsItem {
   url?: string;
   name: string;
+  onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 interface BreadCrumbsProps {
@@ -16,7 +17,7 @@ const BreadCrumbs: React.FC<BreadCrumbsProps> = ({ items }) => {
     <nav aria-label="breadcrumb" className={styles.root}>
       {items.map((item, index) => {
         const linkElement = (
-          <a className={styles.link} href={item.url} tabIndex={0} role="link">
+          <a className={styles.link} href={item.url} onClick={item.onClick} tabIndex={0} role="link">
             {item.name}
           </a>
         );

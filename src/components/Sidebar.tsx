@@ -119,10 +119,10 @@ const Sidebar: React.FC<Props> = ({ path, navigate, onPickAny, onClose }) => {
         >
           github
         </ActionListItem>
-        <ActionListItem icon="↗" href="#/resume.txt">
+        <ActionListItem icon="↗" onClick={go("/resume.txt")}>
           resume
         </ActionListItem>
-        <ActionListItem icon="↗" href="#/now.log">
+        <ActionListItem icon="↗" onClick={go("/now.log")}>
           now
         </ActionListItem>
       </div>

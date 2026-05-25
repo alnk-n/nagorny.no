@@ -1,6 +1,7 @@
 // TopBar.tsx — site navigation bar (theme + tint toggles, mobile menu trigger).
 
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 
 import Navigation from "./srcl/Navigation";
 
@@ -28,10 +29,11 @@ const TopBar: React.FC<Props> = ({
   setTint,
   onMenu,
 }) => {
+  const navigate = useNavigate();
   return (
     <Navigation
       logo={<>~ / akn</>}
-      logoHref="#/"
+      onClickLogo={() => navigate("/")}
       left={
         <button
           className="srcl-logo-like site-menu-btn"

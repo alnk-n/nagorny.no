@@ -2,6 +2,7 @@
 // and a flat layout is easier to navigate than ten one-page files.
 
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   CERTS,
@@ -98,20 +99,20 @@ export function PageReadme() {
 
       <Card title="ANBEFALT STARTPUNKT" mode="left">
         <Text>
-          Begynn med <a href="#/about.md">about.md</a> hvis du vil vite hvem jeg
-          er, eller <a href="#/projects/">projects/</a> hvis du heller vil se
+          Begynn med <Link to="/about.md">about.md</Link> hvis du vil vite hvem jeg
+          er, eller <Link to="/projects/">projects/</Link> hvis du heller vil se
           hva jeg holder på med i fritiden min.
         </Text>
         <div className="btn-row">
-          <a className="btn-primary" href="#/about.md">
+          <Link className="btn-primary" to="/about.md">
             About →
-          </a>
-          <a className="btn-secondary" href="#/projects/">
+          </Link>
+          <Link className="btn-secondary" to="/projects/">
             Projects →
-          </a>
-          <a className="btn-secondary" href="#/writing/">
+          </Link>
+          <Link className="btn-secondary" to="/writing/">
             Writing →
-          </a>
+          </Link>
         </div>
       </Card>
     </>
@@ -312,9 +313,9 @@ export function PageProjectsIndex() {
             <Text style={{ opacity: 0.75 }}>{p.stack}</Text>
             <Text style={{ marginTop: "0.5rem" }}>{p.note}</Text>
             <div className="btn-row">
-              <a className="btn-secondary" href={`#/projects/${p.id}.md`}>
+              <Link className="btn-secondary" to={`/projects/${p.id}.md`}>
                 Les mer →
-              </a>
+              </Link>
             </div>
           </Card>
         ))}
@@ -324,14 +325,15 @@ export function PageProjectsIndex() {
 }
 
 export function PageProjectDetail({ id }: { id: string }) {
+  const navigate = useNavigate();
   const p = PROJECTS.find((x) => x.id === id) || PROJECTS[0];
   return (
     <>
       <BreadCrumbs
         items={[
-          { name: "~", url: "#/" },
-          { name: "projects", url: "#/projects/" },
-          { name: `${p.id}.md`, url: `#/projects/${p.id}.md` },
+          { name: "~", url: "/", onClick: (e) => { e.preventDefault(); navigate("/"); } },
+          { name: "projects", url: "/projects/", onClick: (e) => { e.preventDefault(); navigate("/projects/"); } },
+          { name: `${p.id}.md`, url: `/projects/${p.id}.md` },
         ]}
       />
 
@@ -391,9 +393,9 @@ export function PageProjectDetail({ id }: { id: string }) {
               Source →
             </a>
           )}
-          <a className="btn-secondary" href="#/projects/">
+          <Link className="btn-secondary" to="/projects/">
             ← Alle prosjekter
-          </a>
+          </Link>
         </div>
       </Card>
     </>
@@ -402,6 +404,7 @@ export function PageProjectDetail({ id }: { id: string }) {
 
 // ── /writing/ + /writing/<slug>.md ─────────────────────────────────────────
 export function PageWritingIndex() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="page-head">
@@ -418,7 +421,7 @@ export function PageWritingIndex() {
         <div>
           {WRITING.map((w) => (
             <div key={w.slug} style={{ marginBottom: "0.5rem" }}>
-              <ActionListItem icon=">" href={`#/writing/${w.slug}.md`}>
+              <ActionListItem icon=">" onClick={() => navigate(`/writing/${w.slug}.md`)}>
                 <span
                   style={{
                     display: "flex",
@@ -506,15 +509,16 @@ function renderBlock(block: ContentBlock, i: number) {
 }
 
 export function PageWritingDetail({ slug }: { slug: string }) {
+  const navigate = useNavigate();
   const w = WRITING.find((x) => x.slug === slug) || WRITING[0];
   const readTime = w.readTime ? `~${w.readTime} min` : "draft";
   return (
     <>
       <BreadCrumbs
         items={[
-          { name: "~", url: "#/" },
-          { name: "writing", url: "#/writing/" },
-          { name: `${w.slug}.md`, url: `#/writing/${w.slug}.md` },
+          { name: "~", url: "/", onClick: (e) => { e.preventDefault(); navigate("/"); } },
+          { name: "writing", url: "/writing/", onClick: (e) => { e.preventDefault(); navigate("/writing/"); } },
+          { name: `${w.slug}.md`, url: `/writing/${w.slug}.md` },
         ]}
       />
 
@@ -543,9 +547,9 @@ export function PageWritingDetail({ slug }: { slug: string }) {
 
       <Card title="NESTE / FORRIGE" mode="left">
         <div className="btn-row" style={{ marginTop: 0 }}>
-          <a className="btn-secondary" href="#/writing/">
+          <Link className="btn-secondary" to="/writing/">
             ← writing/
-          </a>
+          </Link>
         </div>
       </Card>
     </>
@@ -559,7 +563,7 @@ export function Page404({ path }: { path: string }) {
       <Text>cat: {path}: No such file or directory.</Text>
       <div style={{ height: "0.75rem" }} />
       <Text style={{ opacity: 0.6 }}>
-        Prøv <a href="#/">~/readme.md</a>, eller bruk sidepanelet.
+        Prøv <Link to="/">~/readme.md</Link>, eller bruk sidepanelet.
       </Text>
     </Window>
   );
