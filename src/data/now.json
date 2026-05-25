@@ -1,18 +1,22 @@
 [
   {
     "text": "Forbereder meg til tverrfaglig eksamen i utvikling & drift.",
+    "text_en": "Preparing for the cross-disciplinary exam in development & operations.",
     "createdAt": "2026-05-24"
   },
   {
     "text": "Migrerer Ubuntu-serveren min til en Proxmox-installasjon.",
+    "text_en": "Migrating my Ubuntu server to a Proxmox installation.",
     "createdAt": "2026-05-24"
   },
   {
     "text": "Utvikler og tester denne nettsiden.",
+    "text_en": "Developing and testing this website.",
     "createdAt": "2026-05-24"
   },
   {
     "text": "Jobber på et Bash-skript som automatiserer formatering av minnepenner med Ventoy2Disk.",
+    "text_en": "Working on a Bash script that automates formatting USB drives with Ventoy2Disk.",
     "createdAt": "2026-05-24"
   }
 ]

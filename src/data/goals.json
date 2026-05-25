@@ -1,12 +1,22 @@
 [
-  { "text": "Ta førerkortet i løpet av sommeren.", "createdAt": "2026-05-24" },
   {
-    "text": "Forstå grunnleggende konsepter i lavspennings-elektronikk.",
+    "text": "Ta førerkortet i løpet av sommeren.",
+    "text_en": "Get my driver's licence during the summer.",
     "createdAt": "2026-05-24"
   },
-  { "text": "Skrive 12 bloggposter (1 per måned).", "createdAt": "2026-05-24" },
+  {
+    "text": "Forstå grunnleggende konsepter i lavspennings-elektronikk.",
+    "text_en": "Understand the fundamentals of low-voltage electronics.",
+    "createdAt": "2026-05-24"
+  },
+  {
+    "text": "Skrive 12 bloggposter (1 per måned).",
+    "text_en": "Write 12 blog posts (1 per month).",
+    "createdAt": "2026-05-24"
+  },
   {
     "text": "Sykle til jobb så ofte som mulig i perioden august → oktober.",
+    "text_en": "Cycle to work as often as possible during August → October.",
     "createdAt": "2026-05-24"
   }
 ]
