@@ -1,7 +1,7 @@
 // pages.tsx — page bodies for every route. One file because the site is small
 // and a flat layout is easier to navigate than ten one-page files.
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -40,6 +40,16 @@ const ASCII_HERO = String.raw`
    Alan Krystian Nagorny ▹ VG2 IT ▹ Tiller VGS, NO
 `;
 
+// Replace with your English ASCII art
+const ASCII_HERO_EN = String.raw`
+  _      __    __                  
+ | | /| / /__ / /______  __ _  ___ 
+ | |/ |/ / -_) / __/ _ \/  ' \/ -_)
+ |__/|__/\__/_/\__/\___/_/_/_/\__/ 
+ 
+   Alan Krystian Nagorny ▹ VG2 IT ▹ Tiller VGS, NO
+`;
+
 function useClock() {
   const [time, setTime] = useState(() =>
     new Date().toLocaleTimeString([], {
@@ -65,11 +75,45 @@ function useClock() {
   return time;
 }
 
+const SCRAMBLE_CHARS = "|\\/-_+#!*▒░█";
+
+function scramble(target: string, revealFraction: number): string {
+  let printable = 0;
+  const total = [...target].filter((c) => c !== "\n" && c !== " ").length;
+  const revealUpTo = Math.floor(total * revealFraction);
+  return [...target]
+    .map((c) => {
+      if (c === "\n" || c === " ") return c;
+      return ++printable <= revealUpTo
+        ? c
+        : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+    })
+    .join("");
+}
+
+function useScramble(target: string, duration = 900): string {
+  const [text, setText] = useState(() => scramble(target, 0));
+  const rafRef = useRef<number>(0);
+  useEffect(() => {
+    let start: number | null = null;
+    function tick(now: number) {
+      if (start === null) start = now;
+      const progress = Math.min((now - start) / duration, 1);
+      setText(progress < 1 ? scramble(target, progress) : target);
+      if (progress < 1) rafRef.current = requestAnimationFrame(tick);
+    }
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [target, duration]);
+  return text;
+}
+
 // ── /readme.md ────────────────────────────────────────────────────────────
 export function PageReadme() {
   const time = useClock();
-  const t = useT();
   const { locale } = useLocale();
+  const hero = useScramble(locale === "en" ? ASCII_HERO_EN : ASCII_HERO);
+  const t = useT();
   const aboutLink =
     locale === "no"
       ? "hvis du vil vite hvem jeg er, eller"
@@ -85,7 +129,7 @@ export function PageReadme() {
         <span className="meta">root · {time} · 2.7kb</span>
       </div>
 
-      <pre className="hero-ascii">{ASCII_HERO}</pre>
+      <pre className="hero-ascii">{hero}</pre>
 
       <Window>
         <Text>
@@ -149,7 +193,8 @@ export function PageAbout() {
         </Text>
         <Text style={{ marginTop: "1rem" }}>{t.about_hobbies}</Text>
         <Text style={{ marginTop: "1rem", opacity: 0.75 }}>
-          {loc(locale, IDENTITY.available, IDENTITY.available_en)} · {t.about_availability}
+          {loc(locale, IDENTITY.available, IDENTITY.available_en)} ·{" "}
+          {t.about_availability}
         </Text>
       </Window>
 
