@@ -11,6 +11,8 @@ Personal website hosted on GitHub Pages with a custom domain.
 ## Local development
 
 ```bash
+cd ./nagorny.no/
+npm i
 npm run dev
 ```
 
