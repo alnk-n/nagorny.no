@@ -12,6 +12,7 @@ import {
 
 import { fileList, parseRoute } from './router';
 import { useHashRoute } from './useHashRoute';
+import { LocaleContext, Locale } from './locale';
 
 type Theme = 'theme-light' | 'theme-dark';
 type Tint = '' | 'tint-green' | 'tint-blue' | 'tint-yellow' | 'tint-pink';
@@ -24,6 +25,9 @@ function App(): React.ReactElement {
   const [tint, setTint] = React.useState<Tint>(
     () => ((localStorage.getItem('tint') as Tint) || '')
   );
+  const [locale, setLocale] = React.useState<Locale>(
+    () => ((localStorage.getItem('locale') as Locale) || 'no')
+  );
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   // Reflect theme + tint on <body> (SRCL's tokens read from body classes).
@@ -32,6 +36,10 @@ function App(): React.ReactElement {
     localStorage.setItem('theme', theme);
     localStorage.setItem('tint', tint);
   }, [theme, tint]);
+
+  React.useEffect(() => {
+    localStorage.setItem('locale', locale);
+  }, [locale]);
 
   // Close drawer + jump to top whenever the route changes.
   React.useEffect(() => {
@@ -113,6 +121,7 @@ function App(): React.ReactElement {
   }
 
   return (
+    <LocaleContext.Provider value={{ locale, setLocale }}>
     <div className="site">
       <header className="site-nav">
         <TopBar
@@ -120,6 +129,8 @@ function App(): React.ReactElement {
           setTheme={setTheme}
           tint={tint}
           setTint={setTint}
+          locale={locale}
+          setLocale={setLocale}
           onMenu={() => setDrawerOpen(true)}
         />
       </header>
@@ -143,6 +154,7 @@ function App(): React.ReactElement {
 
       <main className="site-main">{page}</main>
     </div>
+    </LocaleContext.Provider>
   );
 }
 

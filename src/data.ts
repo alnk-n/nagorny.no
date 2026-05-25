@@ -5,12 +5,14 @@ import nowRaw from "./data/now.json";
 
 export interface GoalItem {
   text: string;
+  text_en?: string;
   createdAt: string;
   archivedAt?: string;
 }
 
 export interface NowItem {
   text: string;
+  text_en?: string;
   createdAt: string;
   archivedAt?: string;
 }
@@ -30,10 +32,14 @@ export interface Project {
   year: string;
   status: string;
   note: string;
+  note_en?: string;
   body: string;
+  body_en?: string;
   arch: string;
   learnings: string[];
+  learnings_en?: string[];
   links: { live?: string; repo?: string };
+  lang?: 'no' | 'en';
 }
 
 export type ContentBlock =
@@ -47,10 +53,14 @@ export interface Post {
   slug: string;
   date: string;
   title: string;
+  title_en?: string;
   tags: string[];
   lede: string;
+  lede_en?: string;
   body?: ContentBlock[];
+  body_en?: ContentBlock[];
   readTime?: number;
+  lang?: 'no' | 'en';
 }
 
 export const IDENTITY = {
@@ -79,28 +89,32 @@ export const WRITING: Post[] = (Object.values(writingFiles) as Post[]).sort(
 );
 
 export const RESUME = [
-  { period: "okt.2025-nå", what: "Diverse utplasseringer ved Garnes Data" },
-  { period: "nov.2025", what: "1 uke ved F24 - Webutvikling" },
-  { period: "mar.2025", what: "1 uke ved Charlottenlund VGS." },
-  { period: "feb.2025", what: "1 uke ved Charlottenlund VGS." },
-  { period: "jul.2023-sep.2022", what: "Trøndelag Lakkering og Snekkering" },
+  { period: "okt.2025-nå", period_en: "oct.2025-present", what: "Diverse utplasseringer ved Garnes Data", what_en: "Various placements at Garnes Data" },
+  { period: "nov.2025", period_en: "nov.2025", what: "1 uke ved F24 - Webutvikling", what_en: "1 week at F24 - Web development" },
+  { period: "mar.2025", period_en: "mar.2025", what: "1 uke ved Charlottenlund VGS.", what_en: "1 week at Charlottenlund VGS." },
+  { period: "feb.2025", period_en: "feb.2025", what: "1 uke ved Charlottenlund VGS.", what_en: "1 week at Charlottenlund VGS." },
+  { period: "jul.2023-sep.2022", period_en: "jul.2023-sep.2022", what: "Trøndelag Lakkering og Snekkering", what_en: "Trøndelag Lacquering and Carpentry" },
 ];
 
 export const SKILLS = [
   {
     group: "infrastruktur",
+    group_en: "infrastructure",
     items: ["Linux", "Docker", "Proxmox", "nginx/Caddy"],
   },
   {
     group: "nettverk",
+    group_en: "networking",
     items: ["VLAN", "pfSense", "Wireshark", "DNS/DHCP", "Wireguard"],
   },
   {
     group: "maskinvare",
+    group_en: "hardware",
     items: ["Kabelterminering", "Racking", "Lodding", "3D-print"],
   },
   {
     group: "andre felt",
+    group_en: "other fields",
     items: [
       "Microsoft Office",
       "Adobe Suite",

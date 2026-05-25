@@ -2,8 +2,10 @@
   "slug": "2026-05-init",
   "date": "2026-05-25",
   "title": "En spennende start på nettsiden min",
+  "title_en": "An exciting start to my website",
   "tags": ["webdev", "personal", "announcement"],
   "lede": "Endelig har jeg fått nytte ut av domenet mitt!",
+  "lede_en": "I've finally put my domain to good use!",
   "readTime": 3,
   "body": [
     {
@@ -20,6 +22,33 @@
     {
       "type": "text",
       "content": "Stacken jeg endte opp med:"
+    },
+    {
+      "type": "code",
+      "lang": "json",
+      "content": "{\n  \"framework\": \"React 18\",\n  \"language\": \"TypeScript\",\n  \"bundler\": \"Vite\"\n}"
+    },
+    {
+      "type": "quote",
+      "content": "Victorious warriors win first and then go to war, while defeated warriors go to war first and then seek to win.",
+      "attribution": "sun tzu, art of war"
+    }
+  ],
+  "body_en": [
+    {
+      "type": "text",
+      "content": "I bought this domain a few months ago with ambitious plans to start a blog and share my thoughts and experiences in web development. I've finally taken the first step and published my website."
+    },
+    {
+      "type": "text",
+      "content": "I also plan to use this platform to document my personal projects, share tips and tricks, and maybe even write some tutorials. I hope this can be a useful resource for others interested in IT."
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "text",
+      "content": "The stack I ended up with:"
     },
     {
       "type": "code",

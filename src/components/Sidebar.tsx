@@ -7,6 +7,7 @@ import ActionListItem from "./srcl/ActionListItem";
 import Divider from "./srcl/Divider";
 
 import { IDENTITY, PROJECTS, WRITING } from "../data";
+import { useT } from "../locale";
 
 interface Props {
   path: string;
@@ -16,6 +17,7 @@ interface Props {
 }
 
 const Sidebar: React.FC<Props> = ({ path, navigate, onPickAny, onClose }) => {
+  const t = useT();
   const isActive = (p: string) => p === path;
   const go = (p: string) => () => {
     navigate(p);
@@ -127,7 +129,7 @@ const Sidebar: React.FC<Props> = ({ path, navigate, onPickAny, onClose }) => {
         </ActionListItem>
       </div>
 
-      <p className="aside-hint">Tastatur: ↑/↓ for å bla mellom filer</p>
+      <p className="aside-hint">{t.sidebar_hint}</p>
     </>
   );
 };

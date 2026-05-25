@@ -15,9 +15,8 @@ import {
   SKILLS,
   WRITING,
 } from "./data";
+import { Locale, useLocale, useT } from "./locale";
 
-import Accordion from "./components/srcl/Accordion";
-import ActionBar from "./components/srcl/ActionBar";
 import Badge from "./components/srcl/Badge";
 import BreadCrumbs from "./components/srcl/BreadCrumbs";
 import Card from "./components/srcl/Card";
@@ -27,12 +26,17 @@ import Text from "./components/srcl/Text";
 import Window from "./components/srcl/Window";
 import ActionListItem from "./components/srcl/ActionListItem";
 
+// Pick the localized version of a value; fall back to `no` when `en` is absent.
+function loc<T>(locale: Locale, no: T, en: T | undefined): T {
+  return locale === "en" && en !== undefined ? en : no;
+}
+
 const ASCII_HERO = String.raw`
   _   ________   __ ______  __  _____  ________  __
  | | / / __/ /  / //_/ __ \/  |/  /  |/  / __/ |/ /
- | |/ / _// /__/ ,< / /_/ / /|_/ / /|_/ / _//    / 
- |___/___/____/_/|_|\____/_/  /_/_/  /_/___/_/|_/  
-                                                   
+ | |/ / _// /__/ ,< / /_/ / /|_/ / /|_/ / _//    /
+ |___/___/____/_/|_|\____/_/  /_/_/  /_/___/_/|_/
+
    Alan Krystian Nagorny ▹ VG2 IT ▹ Tiller VGS, NO
 `;
 
@@ -64,6 +68,14 @@ function useClock() {
 // ── /readme.md ────────────────────────────────────────────────────────────
 export function PageReadme() {
   const time = useClock();
+  const t = useT();
+  const { locale } = useLocale();
+  const aboutLink = locale === "no"
+    ? "hvis du vil vite hvem jeg er, eller"
+    : "if you want to know who I am, or";
+  const projectsLink = locale === "no"
+    ? "hvis du heller vil se hva jeg holder på med i fritiden min."
+    : "to see what I do in my free time.";
   return (
     <>
       <div className="page-head">
@@ -75,17 +87,17 @@ export function PageReadme() {
 
       <Window>
         <Text>
-          Hei! Velkommen til hjemmesiden min.
+          {t.readme_welcome}
           <br />
-          Denne siden brukes som en portfolio og blogg.
+          {t.readme_portfolio}
           <br />
           <br />
-          For å navigere, klikk på en fil i sidemenyen, eller bruk piltastene.
+          {t.readme_nav}
           <br />
-          På mobil: trykk «MENU» øverst.
+          {t.readme_mobile}
         </Text>
         <Text style={{ marginTop: "1rem" }}>
-          Bygget med{" "}
+          {t.readme_built_with}{" "}
           <a
             href="https://www.sacred.computer/"
             target="_blank"
@@ -93,15 +105,16 @@ export function PageReadme() {
           >
             SRCL:
           </a>{" "}
-          et open-source React-bibliotek.
+          {t.readme_built_lib}
         </Text>
       </Window>
 
-      <Card title="ANBEFALT STARTPUNKT" mode="left">
+      <Card title={t.readme_start_card} mode="left">
         <Text>
-          Begynn med <Link to="/about.md">about.md</Link> hvis du vil vite hvem jeg
-          er, eller <Link to="/projects/">projects/</Link> hvis du heller vil se
-          hva jeg holder på med i fritiden min.
+          {t.readme_start_text} <Link to="/about.md">about.md</Link>{" "}
+          {aboutLink}{" "}
+          <Link to="/projects/">projects/</Link>{" "}
+          {projectsLink}
         </Text>
         <div className="btn-row">
           <Link className="btn-primary" to="/about.md">
@@ -121,6 +134,8 @@ export function PageReadme() {
 
 // ── /about.md ─────────────────────────────────────────────────────────────
 export function PageAbout() {
+  const t = useT();
+  const { locale } = useLocale();
   return (
     <>
       <div className="page-head">
@@ -130,16 +145,13 @@ export function PageAbout() {
 
       <Window>
         <Text>
-          Jeg heter <b>{IDENTITY.name}</b>. 17 år, avgangselev på VG2 IT ved
-          Tiller VGS.
+          Jeg heter <b>{IDENTITY.name}</b>. {t.about_bio}
         </Text>
         <Text style={{ marginTop: "1rem" }}>
-          På fritiden skrur jeg på datautstyr, lodder, og eksperimenterer med
-          programvare. Operativsystemer (hovedsakelig Linux) og nettverk er
-          særlig interesserende.
+          {t.about_hobbies}
         </Text>
         <Text style={{ marginTop: "1rem", opacity: 0.75 }}>
-          {IDENTITY.available} · Snakker norsk, engelsk og polsk.
+          {IDENTITY.available} · {t.about_availability}
         </Text>
       </Window>
 
@@ -147,7 +159,7 @@ export function PageAbout() {
         {SKILLS.map((g) => (
           <div key={g.group} style={{ marginBottom: "0.5rem" }}>
             <div style={{ opacity: 0.7, textTransform: "uppercase" }}>
-              {g.group}
+              {loc(locale, g.group, g.group_en)}
             </div>
             <div className="tag-row">
               {g.items.map((it) => (
@@ -166,12 +178,17 @@ export function PageAbout() {
         </div>
       </Card>
 
-      <Card title="MÅL FOR 2026" mode="left">
+      <Card title={t.about_goals_card} mode="left">
         <ul style={{ paddingLeft: 0, listStyle: "none" }}>
           {GOALS.map((g) => (
-            <li key={g.text} style={{ display: "flex", gap: "1ch" }}>
+            <li key={g.text} style={{ display: "flex", gap: "1ch", alignItems: "baseline" }}>
               <span className="bullet">▪</span>
-              <span>{g.text}</span>
+              <span>
+                {loc(locale, g.text, g.text_en)}
+                {locale === "en" && !g.text_en && (
+                  <Badge style={{ fontSize: "0.75em", marginLeft: "0.5ch" }}>(NO)</Badge>
+                )}
+              </span>
             </li>
           ))}
         </ul>
@@ -182,6 +199,8 @@ export function PageAbout() {
 
 // ── /now.log ──────────────────────────────────────────────────────────────
 export function PageNow() {
+  const t = useT();
+  const { locale } = useLocale();
   return (
     <>
       <div className="page-head">
@@ -198,18 +217,22 @@ export function PageNow() {
           >
             /now
           </a>
-          »-side. Hva jeg jobber med akkurat nå.
+          »-{t.now_description}
         </Text>
         {NOW.map((n) => (
           <Text key={n.text} style={{ marginBottom: "0.5rem" }}>
-            <span style={{ opacity: 0.6 }}>·</span> {n.text}
+            <span style={{ opacity: 0.6 }}>·</span>{" "}
+            {loc(locale, n.text, n.text_en)}
+            {locale === "en" && !n.text_en && (
+              <Badge style={{ fontSize: "0.75em", marginLeft: "0.5ch" }}>(NO)</Badge>
+            )}
           </Text>
         ))}
         <div style={{ marginTop: "1rem" }}>
           <Divider />
         </div>
         <Text style={{ marginTop: "0.75rem", opacity: 0.6 }}>
-          sist oppdatert 2026-05-24
+          {t.now_updated}
         </Text>
       </Window>
     </>
@@ -218,6 +241,8 @@ export function PageNow() {
 
 // ── /resume.txt ───────────────────────────────────────────────────────────
 export function PageResume() {
+  const t = useT();
+  const { locale } = useLocale();
   return (
     <>
       <div className="page-head">
@@ -225,33 +250,33 @@ export function PageResume() {
         <span className="meta">view · 1.18kb</span>
       </div>
 
-      <Card title="ERFARING" mode="left">
+      <Card title={t.resume_experience} mode="left">
         <div className="resume-list">
           {RESUME.map((r, i) => (
             <div key={i} className="resume-entry">
-              <span className="k">{r.period}</span>
-              <span>{r.what}</span>
+              <span className="k">{loc(locale, r.period, r.period_en)}</span>
+              <span>{loc(locale, r.what, r.what_en)}</span>
             </div>
           ))}
         </div>
       </Card>
 
-      <Card title="UTDANNING" mode="left">
+      <Card title={t.resume_education} mode="left">
         <div className="resume-list">
           <div className="resume-entry">
-            <span className="k">2024-nå</span>
-            <span>Tiller VGS · IT VG2 · IT &amp; medieproduksjon VG1.</span>
+            <span className="k">{t.resume_edu1_period}</span>
+            <span>{t.resume_edu1_text}</span>
           </div>
           <div className="resume-entry">
-            <span className="k">2021-2024</span>
-            <span>Sverresborg ungdomsskole.</span>
+            <span className="k">{t.resume_edu2_period}</span>
+            <span>{t.resume_edu2_text}</span>
           </div>
         </div>
       </Card>
 
-      <Card title="REFERANSER" mode="left">
+      <Card title={t.resume_references} mode="left">
         <Text style={{ opacity: 0.7 }}>
-          Tilgjengelig på forespørsel - kontakt via e-post.
+          {t.resume_refs_text}
         </Text>
       </Card>
     </>
@@ -297,6 +322,7 @@ github   = ${IDENTITY.github}`}
 
 // ── /projects/ + /projects/<id>.md ─────────────────────────────────────────
 export function PageProjectsIndex() {
+  const { locale } = useLocale();
   return (
     <>
       <div className="page-head">
@@ -311,7 +337,7 @@ export function PageProjectsIndex() {
               <Badge>{p.status}</Badge>
             </div>
             <Text style={{ opacity: 0.75 }}>{p.stack}</Text>
-            <Text style={{ marginTop: "0.5rem" }}>{p.note}</Text>
+            <Text style={{ marginTop: "0.5rem" }}>{loc(locale, p.note, p.note_en)}</Text>
             <div className="btn-row">
               <Link className="btn-secondary" to={`/projects/${p.id}.md`}>
                 Les mer →
@@ -326,7 +352,10 @@ export function PageProjectsIndex() {
 
 export function PageProjectDetail({ id }: { id: string }) {
   const navigate = useNavigate();
+  const t = useT();
+  const { locale } = useLocale();
   const p = PROJECTS.find((x) => x.id === id) || PROJECTS[0];
+  const langMismatch = p.lang && p.lang !== locale;
   return (
     <>
       <BreadCrumbs
@@ -349,17 +378,20 @@ export function PageProjectDetail({ id }: { id: string }) {
           <Badge>{p.status}</Badge>
           {p.links.live && <Badge>LIVE</Badge>}
           <Badge>{p.year}</Badge>
+          {langMismatch && (
+            <Badge>{p.lang === "no" ? t.lang_no_only : t.lang_en_only}</Badge>
+          )}
         </div>
-        <Text>{p.body}</Text>
+        <Text>{loc(locale, p.body, p.body_en)}</Text>
       </Window>
 
-      <Card title="ARKITEKTUR" mode="left">
+      <Card title={t.project_arch} mode="left">
         <CodeBlock>{p.arch}</CodeBlock>
       </Card>
 
-      <Card title="LÆRINGER" mode="left">
+      <Card title={t.project_learnings} mode="left">
         <ul style={{ paddingLeft: 0, listStyle: "none" }}>
-          {p.learnings.map((l, i) => (
+          {loc(locale, p.learnings, p.learnings_en).map((l, i) => (
             <li
               key={i}
               style={{ display: "flex", gap: "1ch", marginBottom: "0.25rem" }}
@@ -371,7 +403,7 @@ export function PageProjectDetail({ id }: { id: string }) {
         </ul>
       </Card>
 
-      <Card title="LENKER" mode="left">
+      <Card title={t.project_links} mode="left">
         <div className="btn-row" style={{ marginTop: 0 }}>
           {p.links.live && (
             <a
@@ -405,18 +437,20 @@ export function PageProjectDetail({ id }: { id: string }) {
 // ── /writing/ + /writing/<slug>.md ─────────────────────────────────────────
 export function PageWritingIndex() {
   const navigate = useNavigate();
+  const t = useT();
+  const { locale } = useLocale();
   return (
     <>
       <div className="page-head">
         <h1>writing/</h1>
         <span className="meta">
-          {WRITING.length} posts · sortert sist først
+          {WRITING.length} posts · {t.writing_meta_suffix}
         </span>
       </div>
 
       <Window>
         <Text style={{ opacity: 0.7, marginBottom: "1rem" }}>
-          Ofte uferdige notater og småtekster.
+          {t.writing_lede}
         </Text>
         <div>
           {WRITING.map((w) => (
@@ -436,7 +470,7 @@ export function PageWritingIndex() {
                   >
                     {w.date}
                   </span>
-                  <span style={{ flex: "1 1 auto" }}>{w.title}</span>
+                  <span style={{ flex: "1 1 auto" }}>{loc(locale, w.title, w.title_en)}</span>
                   {w.tags.map((t) => <Badge key={t} style={{ background: "var(--theme-background)" }}>{t}</Badge>)}
                 </span>
               </ActionListItem>
@@ -448,7 +482,7 @@ export function PageWritingIndex() {
                   marginBottom: "0.5rem",
                 }}
               >
-                {w.lede}
+                {loc(locale, w.lede, w.lede_en)}
               </Text>
             </div>
           ))}
@@ -510,8 +544,12 @@ function renderBlock(block: ContentBlock, i: number) {
 
 export function PageWritingDetail({ slug }: { slug: string }) {
   const navigate = useNavigate();
+  const t = useT();
+  const { locale } = useLocale();
   const w = WRITING.find((x) => x.slug === slug) || WRITING[0];
   const readTime = w.readTime ? `~${w.readTime} min` : "draft";
+  const langMismatch = w.lang && w.lang !== locale;
+  const body = loc(locale, w.body, w.body_en);
   return (
     <>
       <BreadCrumbs
@@ -523,29 +561,31 @@ export function PageWritingDetail({ slug }: { slug: string }) {
       />
 
       <div className="page-head">
-        <h1>{w.title}</h1>
+        <h1>{loc(locale, w.title, w.title_en)}</h1>
         <span className="meta">{w.date} · {readTime}</span>
       </div>
 
       <Window>
         <div className="tag-row" style={{ marginBottom: "0.75rem" }}>
-          {w.tags.map((t) => <Badge key={t} style={{ background: "var(--theme-background)" }}>{t}</Badge>)}
-          <Badge style={{ background: "var(--theme-background)" }}>NO</Badge>
+          {w.tags.map((tag) => <Badge key={tag} style={{ background: "var(--theme-background)" }}>{tag}</Badge>)}
+          {langMismatch && (
+            <Badge>{w.lang === "no" ? t.lang_no_only : t.lang_en_only}</Badge>
+          )}
         </div>
-        <Text style={{ opacity: 0.8 }}>{w.lede}</Text>
+        <Text style={{ opacity: 0.8 }}>{loc(locale, w.lede, w.lede_en)}</Text>
         <div style={{ marginTop: "1rem" }}>
           <Divider />
         </div>
-        {w.body && w.body.length > 0 ? (
-          w.body.map((block, i) => renderBlock(block, i))
+        {body && body.length > 0 ? (
+          body.map((block, i) => renderBlock(block, i))
         ) : (
           <Text style={{ marginTop: "0.75rem", opacity: 0.5 }}>
-            Ikke ferdig skrevet ennå.
+            {t.writing_empty}
           </Text>
         )}
       </Window>
 
-      <Card title="NESTE / FORRIGE" mode="left">
+      <Card title={t.writing_nav_card} mode="left">
         <div className="btn-row" style={{ marginTop: 0 }}>
           <Link className="btn-secondary" to="/writing/">
             ← writing/
@@ -558,12 +598,15 @@ export function PageWritingDetail({ slug }: { slug: string }) {
 
 // ── 404 ───────────────────────────────────────────────────────────────────
 export function Page404({ path }: { path: string }) {
+  const t = useT();
   return (
     <Window>
       <Text>cat: {path}: No such file or directory.</Text>
       <div style={{ height: "0.75rem" }} />
       <Text style={{ opacity: 0.6 }}>
-        Prøv <Link to="/">~/readme.md</Link>, eller bruk sidepanelet.
+        {t.page404_hint.split("~/readme.md").map((part, i) =>
+          i === 0 ? part : <><Link to="/">~/readme.md</Link>{part}</>
+        )}
       </Text>
     </Window>
   );
