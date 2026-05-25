@@ -36,12 +36,21 @@ export interface Project {
   links: { live?: string; repo?: string };
 }
 
+export type ContentBlock =
+  | { type: "text"; content: string }
+  | { type: "code"; content: string; lang?: string }
+  | { type: "image"; src: string; alt?: string; caption?: string }
+  | { type: "quote"; content: string; attribution?: string }
+  | { type: "divider" };
+
 export interface Post {
   slug: string;
   date: string;
   title: string;
   tag: string;
   lede: string;
+  body?: ContentBlock[];
+  readTime?: number;
 }
 
 export const IDENTITY = {

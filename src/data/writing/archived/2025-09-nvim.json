@@ -3,5 +3,33 @@
   "date": "2025-09-30",
   "title": "Hvorfor jeg byttet fra VS Code til Neovim",
   "tag": "tooling",
-  "lede": "Spoiler: lazy.nvim, telescope, og litt selvbedrag."
+  "lede": "Spoiler: lazy.nvim, telescope, og litt selvbedrag.",
+  "readTime": 5,
+  "body": [
+    {
+      "type": "text",
+      "content": "Jeg har brukt VS Code siden jeg startet å kode. Det er greit. Det funker. Men etter hvert begynte det å kjennes tungt — mange utvidelser, treg oppstart, og alltid noe som drar meg ut av fokus."
+    },
+    {
+      "type": "text",
+      "content": "Neovim er annerledes. Oppstartstiden er under 100 ms. Tastaturet er alt. Det tar tid å lære, men når det klikker, er det vanskelig å gå tilbake."
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "text",
+      "content": "Pluginene jeg endte opp med:"
+    },
+    {
+      "type": "code",
+      "lang": "lua",
+      "content": "-- ~/.config/nvim/lua/plugins.lua\nreturn {\n  { \"folke/lazy.nvim\" },\n  { \"nvim-telescope/telescope.nvim\" },\n  { \"neovim/nvim-lspconfig\" },\n  { \"nvim-treesitter/nvim-treesitter\", build = \":TSUpdate\" },\n}"
+    },
+    {
+      "type": "quote",
+      "content": "Redaktøren din skal hjelpe deg å tenke, ikke tenke for deg.",
+      "attribution": "notat til meg selv"
+    }
+  ]
 }

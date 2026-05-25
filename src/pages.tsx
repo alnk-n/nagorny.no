@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 
 import {
   CERTS,
+  ContentBlock,
   GOALS,
   IDENTITY,
   NOW,
@@ -454,8 +455,59 @@ export function PageWritingIndex() {
   );
 }
 
+function renderBlock(block: ContentBlock, i: number) {
+  switch (block.type) {
+    case "text":
+      return (
+        <Text key={i} style={{ marginTop: "0.75rem" }}>
+          {block.content}
+        </Text>
+      );
+    case "code":
+      return (
+        <div key={i} style={{ marginTop: "1rem" }}>
+          <CodeBlock>{block.content}</CodeBlock>
+        </div>
+      );
+    case "image":
+      return (
+        <div key={i} style={{ marginTop: "1rem" }}>
+          <img
+            src={block.src}
+            alt={block.alt ?? ""}
+            style={{ maxWidth: "100%", display: "block" }}
+          />
+          {block.caption && (
+            <Text style={{ opacity: 0.6, marginTop: "0.25rem", fontSize: "0.85em" }}>
+              {block.caption}
+            </Text>
+          )}
+        </div>
+      );
+    case "quote":
+      return (
+        <div key={i} className="quote" style={{ marginTop: "1rem" }}>
+          «{block.content}»
+          {block.attribution && (
+            <>
+              <br />
+              <span style={{ opacity: 0.6 }}>— {block.attribution}</span>
+            </>
+          )}
+        </div>
+      );
+    case "divider":
+      return (
+        <div key={i} style={{ marginTop: "1rem" }}>
+          <Divider />
+        </div>
+      );
+  }
+}
+
 export function PageWritingDetail({ slug }: { slug: string }) {
   const w = WRITING.find((x) => x.slug === slug) || WRITING[0];
+  const readTime = w.readTime ? `~${w.readTime} min` : "draft";
   return (
     <>
       <BreadCrumbs
@@ -468,7 +520,7 @@ export function PageWritingDetail({ slug }: { slug: string }) {
 
       <div className="page-head">
         <h1>{w.title}</h1>
-        <span className="meta">{w.date} · ~6 min</span>
+        <span className="meta">{w.date} · {readTime}</span>
       </div>
 
       <Window>
@@ -480,25 +532,13 @@ export function PageWritingDetail({ slug }: { slug: string }) {
         <div style={{ marginTop: "1rem" }}>
           <Divider />
         </div>
-        <Text style={{ marginTop: "0.75rem" }}>
-          Lorem ipsum dolor sit norsk. Dette er en plassholder for blogposten —
-          den ekte teksten erstattes når jeg får skrevet den ferdig. Forventet
-          er kodeblokker, sitater, screenshot-er og en lenke til repoen på
-          slutten.
-        </Text>
-        <div style={{ marginTop: "1rem" }}>
-          <CodeBlock>{`# /etc/nginx/sites-enabled/eriksen.dev
-server {
-  listen 443 ssl http2;
-  server_name eriksen.dev;
-  root /var/www/eriksen;
-}`}</CodeBlock>
-        </div>
-        <div className="quote" style={{ marginTop: "1rem" }}>
-          «Det enkleste systemet som virker er ofte det riktige systemet.»
-          <br />
-          <span style={{ opacity: 0.6 }}>— notat til meg selv</span>
-        </div>
+        {w.body && w.body.length > 0 ? (
+          w.body.map((block, i) => renderBlock(block, i))
+        ) : (
+          <Text style={{ marginTop: "0.75rem", opacity: 0.5 }}>
+            Ikke ferdig skrevet ennå.
+          </Text>
+        )}
       </Window>
 
       <Card title="NESTE / FORRIGE" mode="left">
