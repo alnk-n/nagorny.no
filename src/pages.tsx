@@ -434,7 +434,7 @@ export function PageWritingIndex() {
                     {w.date}
                   </span>
                   <span style={{ flex: "1 1 auto" }}>{w.title}</span>
-                  <Badge>{w.tag}</Badge>
+                  {w.tags.map((t) => <Badge key={t}>{t}</Badge>)}
                 </span>
               </ActionListItem>
               <Text
@@ -525,7 +525,7 @@ export function PageWritingDetail({ slug }: { slug: string }) {
 
       <Window>
         <div className="tag-row" style={{ marginBottom: "0.75rem" }}>
-          <Badge>{w.tag}</Badge>
+          {w.tags.map((t) => <Badge key={t}>{t}</Badge>)}
           <Badge>NO</Badge>
         </div>
         <Text style={{ opacity: 0.8 }}>{w.lede}</Text>

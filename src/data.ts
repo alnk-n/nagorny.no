@@ -47,7 +47,7 @@ export interface Post {
   slug: string;
   date: string;
   title: string;
-  tag: string;
+  tags: string[];
   lede: string;
   body?: ContentBlock[];
   readTime?: number;
