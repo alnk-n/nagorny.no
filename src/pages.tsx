@@ -529,8 +529,8 @@ export function PageWritingDetail({ slug }: { slug: string }) {
 
       <Window>
         <div className="tag-row" style={{ marginBottom: "0.75rem" }}>
-          {w.tags.map((t) => <Badge key={t}>{t}</Badge>)}
-          <Badge>NO</Badge>
+          {w.tags.map((t) => <Badge key={t} style={{ background: "var(--theme-background)" }}>{t}</Badge>)}
+          <Badge style={{ background: "var(--theme-background)" }}>NO</Badge>
         </div>
         <Text style={{ opacity: 0.8 }}>{w.lede}</Text>
         <div style={{ marginTop: "1rem" }}>
