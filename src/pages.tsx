@@ -138,6 +138,9 @@ export function PageReadme() {
           {t.readme_portfolio}
           <br />
           <br />
+          {t.readme_localization}
+          <br />
+          <br />
           {t.readme_nav}
           <br />
           {t.readme_mobile}
