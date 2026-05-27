@@ -45,7 +45,7 @@
 }
 
 .children {
-  min-width: 10%;
+  min-width: 0;
   width: 100%;
 }
 

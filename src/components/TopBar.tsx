@@ -57,7 +57,10 @@ const TopBar: React.FC<Props> = ({
               setTint((t) => TINTS[(TINTS.indexOf(t) + 1) % TINTS.length])
             }
           >
-            {tint ? tint.replace("tint-", "◆ ") : "◇ tint"}
+            {tint ? "◆" : "◇"}
+          <span className="site-tint-label">
+            {tint ? tint.replace("tint-", " ") : " tint"}
+          </span>
           </button>
           <button
             className="srcl-logo-like"

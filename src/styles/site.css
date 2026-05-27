@@ -100,8 +100,11 @@
   }
   .srcl-logo-like.site-menu-btn:active { opacity: 0.85; }
 
-  /* Hide the tint cycler — saves room for the theme toggle + menu trigger. */
-  .site-tint-btn { display: none; }
+  /* Collapse tint label to symbol-only — keeps the button functional and compact. */
+  .site-tint-label { display: none; }
+
+  /* Tighten button padding so logo + menu + locale + theme all fit in the nav. */
+  .srcl-logo-like { padding: 0 0.5ch; }
 
   .site-main { padding: calc(var(--theme-line-height-base) * 1rem) 1.5ch 4rem; }
   .site-backdrop {
