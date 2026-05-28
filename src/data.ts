@@ -94,7 +94,7 @@ export const RESUME = [
     period: "okt.2025-nå",
     period_en: "oct.2025-present",
     what: "Diverse utplasseringer ved Garnes Data",
-    what_en: "Various placements at Garnes Data",
+    what_en: "Various internships at Garnes Data",
   },
   {
     period: "nov.2025",
@@ -118,7 +118,7 @@ export const RESUME = [
     period: "jul.2023-sep.2022",
     period_en: "jul.2023-sep.2022",
     what: "Trøndelag Lakkering og Snekkering",
-    what_en: "Trøndelag Lacquering and Carpentry",
+    what_en: "Trøndelag Lakkering og Snekkering",
   },
 ];
 
