@@ -1,4 +1,4 @@
-// App.tsx — root layout, hash router, sidebar drawer, global keyboard nav.
+// App.tsx — root layout, router, sidebar drawer, global keyboard nav.
 
 import * as React from 'react';
 
@@ -11,14 +11,14 @@ import {
 } from './pages';
 
 import { fileList, parseRoute } from './router';
-import { useHashRoute } from './useHashRoute';
+import { useRoute } from './useRoute';
 import { LocaleContext, Locale } from './locale';
 
 type Theme = 'theme-light' | 'theme-dark';
 type Tint = '' | 'tint-green' | 'tint-blue' | 'tint-yellow' | 'tint-pink';
 
 function App(): React.ReactElement {
-  const [path, navigate] = useHashRoute();
+  const [path, navigate] = useRoute();
   const [theme, setTheme] = React.useState<Theme>(
     () => ((localStorage.getItem('theme') as Theme) || 'theme-dark')
   );
