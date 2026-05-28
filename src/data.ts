@@ -2,6 +2,7 @@
 
 import goalsRaw from "./data/goals.json";
 import nowRaw from "./data/now.json";
+import { mdToPost, mdToProject, markdownToBlocks } from "./common/markdown";
 
 export interface GoalItem {
   text: string;
@@ -25,6 +26,18 @@ export const NOW: NowItem[] = (nowRaw as NowItem[]).filter(
   (n) => !n.archivedAt,
 );
 
+export type ContentBlock =
+  | { type: "text"; content: string; html?: boolean }
+  | { type: "code"; content: string; lang?: string }
+  | { type: "image"; src: string; alt?: string; caption?: string }
+  | { type: "quote"; content: string; attribution?: string }
+  | { type: "divider" }
+  | { type: "heading"; level: 2 | 3 | 4; content: string; html?: boolean }
+  | { type: "list"; ordered?: boolean; items: string[]; html?: boolean }
+  | { type: "table"; data: string[][] }
+  | { type: "callout"; content: string; title?: string; html?: boolean }
+  | { type: "details"; summary: string; content: string; html?: boolean };
+
 export interface Project {
   id: string;
   name: string;
@@ -33,21 +46,14 @@ export interface Project {
   status: string;
   note: string;
   note_en?: string;
-  body: string;
-  body_en?: string;
+  body: ContentBlock[];
+  body_en?: ContentBlock[];
   arch: string;
   learnings: string[];
   learnings_en?: string[];
   links: { live?: string; repo?: string };
   lang?: "no" | "en";
 }
-
-export type ContentBlock =
-  | { type: "text"; content: string }
-  | { type: "code"; content: string; lang?: string }
-  | { type: "image"; src: string; alt?: string; caption?: string }
-  | { type: "quote"; content: string; attribution?: string }
-  | { type: "divider" };
 
 export interface Post {
   slug: string;
@@ -73,21 +79,91 @@ export const IDENTITY = {
   available_en: "Starting as an IT apprentice in autumn 2026",
 };
 
-const projectFiles = import.meta.glob<Project>("./data/projects/*.json", {
+const projectJsonFiles = import.meta.glob<Project>("./data/projects/*.json", {
   eager: true,
   import: "default",
 });
-export const PROJECTS: Project[] = (
-  Object.values(projectFiles) as Project[]
-).sort((a, b) => b.year.localeCompare(a.year) || a.id.localeCompare(b.id));
+const allProjectMdFiles = import.meta.glob("./data/projects/*.md", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
 
-const writingFiles = import.meta.glob<Post>("./data/writing/*.json", {
+// Separate primary .md files from .en.md English-body companions
+const projectEnBodies = new Map<string, ContentBlock[]>();
+const projectMdPrimary: string[] = [];
+for (const [key, raw] of Object.entries(allProjectMdFiles)) {
+  const filename = key.split("/").pop()!;
+  if (filename.endsWith(".en.md")) {
+    const id = filename.slice(0, -".en.md".length);
+    projectEnBodies.set(id, markdownToBlocks(raw));
+  } else {
+    projectMdPrimary.push(raw);
+  }
+}
+
+const projectMdParsed: Project[] = projectMdPrimary
+  .map((raw) => mdToProject(raw))
+  .filter((p): p is Project => p !== null);
+
+const projectJsonMap = new Map(
+  (Object.values(projectJsonFiles) as Project[]).map((p) => [p.id, p]),
+);
+// JSON wins over .md when both define the same id
+for (const p of projectMdParsed) {
+  if (!projectJsonMap.has(p.id)) projectJsonMap.set(p.id, p);
+}
+
+export const PROJECTS: Project[] = Array.from(projectJsonMap.values())
+  .map((p) =>
+    !p.body_en && projectEnBodies.has(p.id)
+      ? { ...p, body_en: projectEnBodies.get(p.id)! }
+      : p,
+  )
+  .sort((a, b) => b.year.localeCompare(a.year) || a.id.localeCompare(b.id));
+
+const writingJsonFiles = import.meta.glob<Post>("./data/writing/*.json", {
   eager: true,
   import: "default",
 });
-export const WRITING: Post[] = (Object.values(writingFiles) as Post[]).sort(
-  (a, b) => b.date.localeCompare(a.date),
+const allWritingMdFiles = import.meta.glob("./data/writing/*.md", {
+  query: "?raw",
+  import: "default",
+  eager: true,
+}) as Record<string, string>;
+
+// Separate primary .md files from .en.md English-body companions
+const writingEnBodies = new Map<string, ContentBlock[]>();
+const writingMdPrimary: string[] = [];
+for (const [key, raw] of Object.entries(allWritingMdFiles)) {
+  const filename = key.split("/").pop()!;
+  if (filename.endsWith(".en.md")) {
+    const slug = filename.slice(0, -".en.md".length);
+    writingEnBodies.set(slug, markdownToBlocks(raw));
+  } else {
+    writingMdPrimary.push(raw);
+  }
+}
+
+const writingMdParsed: Post[] = writingMdPrimary
+  .map((raw) => mdToPost(raw))
+  .filter((p): p is Post => p !== null);
+
+const writingJsonMap = new Map(
+  (Object.values(writingJsonFiles) as Post[]).map((p) => [p.slug, p]),
 );
+// JSON wins over .md when both define the same slug
+for (const p of writingMdParsed) {
+  if (!writingJsonMap.has(p.slug)) writingJsonMap.set(p.slug, p);
+}
+
+export const WRITING: Post[] = Array.from(writingJsonMap.values())
+  .map((p) =>
+    !p.body_en && writingEnBodies.has(p.slug)
+      ? { ...p, body_en: writingEnBodies.get(p.slug)! }
+      : p,
+  )
+  .sort((a, b) => b.date.localeCompare(a.date));
 
 export const RESUME = [
   {
