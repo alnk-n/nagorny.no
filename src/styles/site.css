@@ -223,6 +223,12 @@
   padding: 0 0.4ch;
 }
 
+.article-img {
+  display: block;
+  max-width: min(100%, 560px);
+  height: auto;
+}
+
 .shortcuts-list {
   display: flex;
   flex-direction: column;

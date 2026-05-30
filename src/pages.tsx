@@ -455,9 +455,9 @@ export function PageProjectDetail({ id }: { id: string }) {
         </div>
         {(() => {
           const body = loc(locale, p.body, p.body_en);
-          return body && body.length > 0 ? (
-            body.map((block, i) => renderBlock(block, i))
-          ) : null;
+          return body && body.length > 0
+            ? body.map((block, i) => renderBlock(block, i))
+            : null;
         })()}
       </Window>
 
@@ -614,7 +614,7 @@ function renderBlock(block: ContentBlock, i: number) {
           <img
             src={block.src}
             alt={block.alt ?? ""}
-            style={{ maxWidth: "100%", display: "block" }}
+            className="article-img"
           />
           {block.caption && (
             <Text
