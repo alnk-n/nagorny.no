@@ -382,6 +382,8 @@ body.tint-pink {
   --tint: #ff00ff;
 }
 
+@supports (color: oklch(from red 1 0 0)) {
+
 body.theme-light.tint-green,
 body.theme-light.tint-blue,
 body.theme-light.tint-red,
@@ -464,6 +466,8 @@ body.theme-dark.tint-pink {
   --theme-window-background: oklch(from var(--tint) 0.24 calc(c * 0.22) h);
   --theme-window-shadow: oklch(from var(--tint) 0.18 calc(c * 0.2) h);
 }
+
+} /* end @supports (color: oklch(from red 1 0 0)) */
 
 #__next {
 }
