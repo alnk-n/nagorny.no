@@ -1,7 +1,7 @@
 // pages.tsx — page bodies for every route. One file because the site is small
 // and a flat layout is easier to navigate than ten one-page files.
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -585,6 +585,43 @@ function renderInline(content: string, html?: boolean) {
   return <>{content}</>;
 }
 
+function AsciiArt({ content, caption }: { content: string; caption?: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const preRef = useRef<HTMLPreElement>(null);
+
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const pre = preRef.current;
+    if (!container || !pre) return;
+
+    const fit = () => {
+      pre.style.fontSize = "1rem";
+      const naturalWidth = pre.scrollWidth;
+      const available = container.clientWidth;
+      if (naturalWidth > 0) {
+        const basePx = parseFloat(getComputedStyle(pre).fontSize);
+        pre.style.fontSize = `${basePx * ((available * 0.6) / naturalWidth)}px`;
+      }
+    };
+
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(container);
+    return () => ro.disconnect();
+  }, [content]);
+
+  return (
+    <div ref={containerRef} style={{ marginTop: "1rem" }}>
+      <pre ref={preRef} className="ascii-art">
+        {content}
+      </pre>
+      {caption && (
+        <Text style={{ marginTop: "0.5rem", opacity: 0.6 }}>{caption}</Text>
+      )}
+    </div>
+  );
+}
+
 function renderBlock(block: ContentBlock, i: number) {
   switch (block.type) {
     case "text":
@@ -611,11 +648,7 @@ function renderBlock(block: ContentBlock, i: number) {
     case "image":
       return (
         <div key={i} style={{ marginTop: "1rem" }}>
-          <img
-            src={block.src}
-            alt={block.alt ?? ""}
-            className="article-img"
-          />
+          <img src={block.src} alt={block.alt ?? ""} className="article-img" />
           {block.caption && (
             <Text
               style={{ opacity: 0.6, marginTop: "0.25rem", fontSize: "0.85em" }}
@@ -632,7 +665,9 @@ function renderBlock(block: ContentBlock, i: number) {
           {block.attribution && (
             <>
               <br />
-              <span style={{ opacity: 0.6 }}>— {renderInline(block.attribution, block.html)}</span>
+              <span style={{ opacity: 0.6 }}>
+                — {renderInline(block.attribution, block.html)}
+              </span>
             </>
           )}
         </div>
@@ -707,6 +742,10 @@ function renderBlock(block: ContentBlock, i: number) {
             )}
           </Accordion>
         </div>
+      );
+    case "ascii":
+      return (
+        <AsciiArt key={i} content={block.content} caption={block.caption} />
       );
   }
 }

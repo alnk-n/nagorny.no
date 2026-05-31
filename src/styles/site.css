@@ -229,6 +229,16 @@
   height: auto;
 }
 
+.ascii-art {
+  font-family: var(--font-family-mono);
+  line-height: 1.15;
+  white-space: pre;
+  color: var(--theme-text);
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
 .shortcuts-list {
   display: flex;
   flex-direction: column;

@@ -98,10 +98,13 @@ export function markdownToBlocks(md: string): ContentBlock[] {
           i++;
         }
         i++; // skip closing :::
-        const content = applyInline(contentLines.join('\n').trim());
-        if (kind === 'details') {
+        if (kind === 'ascii') {
+          blocks.push({ type: 'ascii', content: contentLines.join('\n'), caption: label });
+        } else if (kind === 'details') {
+          const content = applyInline(contentLines.join('\n').trim());
           blocks.push({ type: 'details', summary: label ?? 'Details', content, html: true });
         } else {
+          const content = applyInline(contentLines.join('\n').trim());
           // callout (default)
           blocks.push({ type: 'callout', content, title: label, html: true });
         }
