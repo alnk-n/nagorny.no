@@ -18,7 +18,7 @@ type FMValue = string | string[];
 type FMRecord = Record<string, FMValue>;
 
 export function parseFrontmatter(raw: string): { meta: FMRecord; body: string } {
-  const lines = raw.split('\n');
+  const lines = raw.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
   if (lines[0]?.trim() !== '---') return { meta: {}, body: raw };
 
   const endIdx = lines.indexOf('---', 1);
@@ -51,7 +51,7 @@ export function parseFrontmatter(raw: string): { meta: FMRecord; body: string } 
 // ── Block-level Markdown → ContentBlock[] ───────────────────────────────────
 
 export function markdownToBlocks(md: string): ContentBlock[] {
-  const lines = md.split('\n');
+  const lines = md.replace(/\r\n/g, '\n').replace(/\r/g, '\n').split('\n');
   const blocks: ContentBlock[] = [];
   let i = 0;
 
