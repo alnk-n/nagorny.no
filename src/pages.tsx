@@ -20,11 +20,14 @@ import { Locale, useLocale, useT } from "./locale";
 import Badge from "./components/srcl/Badge";
 import BreadCrumbs from "./components/srcl/BreadCrumbs";
 import Card from "./components/srcl/Card";
+import CardDouble from "./components/srcl/CardDouble";
 import CodeBlock from "./components/srcl/CodeBlock";
 import Divider from "./components/srcl/Divider";
+import SimpleTable from "./components/srcl/SimpleTable";
 import Text from "./components/srcl/Text";
 import Window from "./components/srcl/Window";
 import ActionListItem from "./components/srcl/ActionListItem";
+import Accordion from "./components/srcl/Accordion";
 
 // Pick the localized version of a value; fall back to `no` when `en` is absent.
 function loc<T>(locale: Locale, no: T, en: T | undefined): T {
@@ -450,7 +453,12 @@ export function PageProjectDetail({ id }: { id: string }) {
             <Badge>{p.lang === "no" ? t.lang_no_only : t.lang_en_only}</Badge>
           )}
         </div>
-        <Text>{loc(locale, p.body, p.body_en)}</Text>
+        {(() => {
+          const body = loc(locale, p.body, p.body_en);
+          return body && body.length > 0
+            ? body.map((block, i) => renderBlock(block, i))
+            : null;
+        })()}
       </Window>
 
       <Card title={t.project_arch} mode="left">
@@ -572,9 +580,23 @@ export function PageWritingIndex() {
   );
 }
 
+function renderInline(content: string, html?: boolean) {
+  if (html) return <span dangerouslySetInnerHTML={{ __html: content }} />;
+  return <>{content}</>;
+}
+
 function renderBlock(block: ContentBlock, i: number) {
   switch (block.type) {
     case "text":
+      if (block.html) {
+        return (
+          <Text
+            key={i}
+            style={{ marginTop: "0.75rem" }}
+            dangerouslySetInnerHTML={{ __html: block.content }}
+          />
+        );
+      }
       return (
         <Text key={i} style={{ marginTop: "0.75rem" }}>
           {block.content}
@@ -592,7 +614,7 @@ function renderBlock(block: ContentBlock, i: number) {
           <img
             src={block.src}
             alt={block.alt ?? ""}
-            style={{ maxWidth: "100%", display: "block" }}
+            className="article-img"
           />
           {block.caption && (
             <Text
@@ -606,7 +628,7 @@ function renderBlock(block: ContentBlock, i: number) {
     case "quote":
       return (
         <div key={i} className="quote" style={{ marginTop: "1rem" }}>
-          «{block.content}»
+          «{renderInline(block.content)}»
           {block.attribution && (
             <>
               <br />
@@ -619,6 +641,71 @@ function renderBlock(block: ContentBlock, i: number) {
       return (
         <div key={i} style={{ marginTop: "1rem" }}>
           <Divider />
+        </div>
+      );
+    case "heading": {
+      const Tag = `h${block.level}` as "h2" | "h3" | "h4";
+      return (
+        <Tag
+          key={i}
+          className={`article-heading article-heading-${block.level}`}
+          dangerouslySetInnerHTML={{ __html: block.content }}
+        />
+      );
+    }
+    case "list":
+      return block.ordered ? (
+        <ol key={i} className="article-list">
+          {block.items.map((item, j) =>
+            block.html ? (
+              <li key={j} dangerouslySetInnerHTML={{ __html: item }} />
+            ) : (
+              <li key={j}>{item}</li>
+            ),
+          )}
+        </ol>
+      ) : (
+        <ul key={i} className="article-list">
+          {block.items.map((item, j) =>
+            block.html ? (
+              <li key={j} dangerouslySetInnerHTML={{ __html: item }} />
+            ) : (
+              <li key={j}>{item}</li>
+            ),
+          )}
+        </ul>
+      );
+    case "table":
+      return (
+        <div key={i} style={{ marginTop: "1rem" }}>
+          <SimpleTable data={block.data} />
+        </div>
+      );
+    case "callout":
+      return (
+        <div key={i} style={{ marginTop: "1rem" }}>
+          <CardDouble title={block.title ?? "note"} mode="left">
+            {block.html ? (
+              <Text dangerouslySetInnerHTML={{ __html: block.content }} />
+            ) : (
+              <Text>{block.content}</Text>
+            )}
+          </CardDouble>
+        </div>
+      );
+    case "details":
+      return (
+        <div key={i} style={{ marginTop: "1rem" }}>
+          <Accordion title={block.summary}>
+            {block.html ? (
+              <Text
+                style={{ marginTop: "0.5rem" }}
+                dangerouslySetInnerHTML={{ __html: block.content }}
+              />
+            ) : (
+              <Text style={{ marginTop: "0.5rem" }}>{block.content}</Text>
+            )}
+          </Accordion>
         </div>
       );
   }

@@ -5,7 +5,16 @@
   "year": "2026",
   "status": "DEPLOYED",
   "note": "Timeplan-aggregator for VGS — lærere limer inn IST-eksport, elever scanner QR for å abonnere på iCal.",
-  "body": "Aggregator for timeplaner. Lærerne mine eksporterer fra IST som CSV; elevene måtte enten skrive inn alt manuelt eller gi opp. Verktøyet tar imot CSV-en, parser den i Rust, og serverer en personlig iCal-feed per elev.\n\nBrukerne bryr seg om én ting: at QR-koden funker første forsøk. Alt annet er sekundært.",
+  "body": [
+    {
+      "type": "text",
+      "content": "Aggregator for timeplaner. Lærerne mine eksporterer fra IST som CSV; elevene måtte enten skrive inn alt manuelt eller gi opp. Verktøyet tar imot CSV-en, parser den i Rust, og serverer en personlig iCal-feed per elev."
+    },
+    {
+      "type": "text",
+      "content": "Brukerne bryr seg om én ting: at QR-koden funker første forsøk. Alt annet er sekundært."
+    }
+  ],
   "arch": "         ┌──────────┐    ┌──────────┐\n IST  →  │ parse.rs │ →  │ postgres │ →  iCal feed (per elev)\n         └──────────┘    └─────┬────┘\n                               ↓\n                          [ SvelteKit ]\n                          /timeplan/:slug",
   "learnings": [
     "RFC-5545 er rar, men håndterbar når man bare bruker VEVENT.",

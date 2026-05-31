@@ -201,6 +201,34 @@
   color: var(--theme-text);
 }
 
+/* ── Article content (from Markdown or ContentBlock body) ───────────────── */
+.article-heading {
+  margin-top: calc(var(--theme-line-height-base) * 1.5rem);
+  margin-bottom: 0;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.article-heading-2 { font-size: var(--font-size); }
+.article-heading-3 { font-size: var(--font-size); opacity: 0.7; }
+.article-heading-4 { font-size: var(--font-size); opacity: 0.5; }
+
+.article-list {
+  margin-top: 0.75rem;
+  padding-left: 2ch;
+}
+.article-list li + li { margin-top: 0.25rem; }
+.article-list code {
+  background: var(--theme-border);
+  padding: 0 0.4ch;
+}
+
+.article-img {
+  display: block;
+  max-width: min(100%, 560px);
+  height: auto;
+}
+
 .shortcuts-list {
   display: flex;
   flex-direction: column;
