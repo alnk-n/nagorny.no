@@ -42,6 +42,13 @@ export default defineConfig({
       plugins: [postcssNesting(), mobileMinWidth],
     },
   },
+  build: {
+    // Tell the Lightning CSS minifier to target Safari 15 so it keeps the
+    // traditional max-width/min-width media query syntax instead of converting
+    // to the Level 4 range syntax (width<=800px), which only landed in Safari
+    // 16.4 and is not supported on iOS 15.8.x.
+    cssTarget: ['safari15'],
+  },
   resolve: {
     alias: {
       "@components": path.resolve(__dirname, "src/components/srcl"),
