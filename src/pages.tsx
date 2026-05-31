@@ -415,7 +415,7 @@ export function PageProjectDetail({ id }: { id: string }) {
   const t = useT();
   const { locale } = useLocale();
   const p = PROJECTS.find((x) => x.id === id) || PROJECTS[0];
-  const langMismatch = p.lang && p.lang !== locale;
+  const langMismatch = p.lang && p.lang !== locale && !loc(locale, p.body_en, p.body);
   return (
     <>
       <BreadCrumbs
@@ -759,8 +759,8 @@ export function PageWritingDetail({ slug }: { slug: string }) {
   const { locale } = useLocale();
   const w = WRITING.find((x) => x.slug === slug) || WRITING[0];
   const readTime = w.readTime ? `~${w.readTime} min` : "draft";
-  const langMismatch = w.lang && w.lang !== locale;
   const body = loc(locale, w.body, w.body_en);
+  const langMismatch = w.lang && w.lang !== locale && !loc(locale, w.body_en, w.body);
   return (
     <>
       <BreadCrumbs
