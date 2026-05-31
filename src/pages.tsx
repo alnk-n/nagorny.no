@@ -632,7 +632,7 @@ function renderBlock(block: ContentBlock, i: number) {
           {block.attribution && (
             <>
               <br />
-              <span style={{ opacity: 0.6 }}>— {block.attribution}</span>
+              <span style={{ opacity: 0.6 }}>— {renderInline(block.attribution, block.html)}</span>
             </>
           )}
         </div>

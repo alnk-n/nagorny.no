@@ -145,7 +145,7 @@ export function markdownToBlocks(md: string): ContentBlock[] {
       } else {
         content = quoteLines.join(' ').trim();
       }
-      blocks.push({ type: 'quote', content: applyInline(content), attribution });
+      blocks.push({ type: 'quote', content: applyInline(content), attribution: attribution ? applyInline(attribution) : undefined, html: true });
       continue;
     }
 
