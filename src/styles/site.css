@@ -305,3 +305,7 @@
   background: var(--theme-focused-foreground);
   color: var(--theme-text);
 }
+
+@supports not (color: oklch(from red 1 0 0)) {
+  .site-tint-btn { display: none; }
+}
