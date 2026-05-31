@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'node:path';
+import postcssNesting from 'postcss-nesting';
 
 // Vite config for nagorny.no
 //   • Aliases match the SRCL source layout (`@components`, `@common`) so the
@@ -8,8 +9,14 @@ import path from 'node:path';
 //   • `base: '/'` because we serve from a custom-domain GitHub Pages site.
 //     If you ever deploy to `<user>.github.io/<repo>` instead, switch to
 //     `base: '/nagorny.no/'`.
+//   • postcss-nesting transpiles CSS nesting (& selectors) for Safari 15 compat.
 export default defineConfig({
   plugins: [react()],
+  css: {
+    postcss: {
+      plugins: [postcssNesting()],
+    },
+  },
   base: '/',
   resolve: {
     alias: {
