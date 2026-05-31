@@ -651,11 +651,7 @@ function renderBlock(block: ContentBlock, i: number) {
     case "image":
       return (
         <div key={i} style={{ marginTop: "1rem" }}>
-          <img
-            src={block.src}
-            alt={block.alt ?? ""}
-            className="article-img"
-          />
+          <img src={block.src} alt={block.alt ?? ""} className="article-img" />
           {block.caption && (
             <Text
               style={{ opacity: 0.6, marginTop: "0.25rem", fontSize: "0.85em" }}
@@ -672,7 +668,9 @@ function renderBlock(block: ContentBlock, i: number) {
           {block.attribution && (
             <>
               <br />
-              <span style={{ opacity: 0.6 }}>— {block.attribution}</span>
+              <span style={{ opacity: 0.6 }}>
+                — {renderInline(block.attribution, block.html)}
+              </span>
             </>
           )}
         </div>

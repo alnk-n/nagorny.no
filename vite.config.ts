@@ -1,7 +1,31 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'node:path';
-import postcssNesting from 'postcss-nesting';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+import postcssNesting from "postcss-nesting";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Wraps any hardcoded min-width (ch, px, em, rem, vw…) with min(value, 100%)
+// so SRCL components can never overflow their container on narrow screens.
+// Percentage values, zero, auto, none, and already-clamped min() calls are left alone.
+const mobileMinWidth = {
+  postcssPlugin: "mobile-min-width",
+  Declaration(decl: any) {
+    if (decl.prop === "min-width") {
+      const val = decl.value.trim();
+      if (
+        !val.startsWith("min(") &&
+        !val.endsWith("%") &&
+        val !== "0" &&
+        val !== "auto" &&
+        val !== "none"
+      ) {
+        decl.value = `min(${val}, 100%)`;
+      }
+    }
+  },
+};
 
 // Vite config for nagorny.no
 //   • Aliases match the SRCL source layout (`@components`, `@common`) so the
@@ -12,19 +36,19 @@ import postcssNesting from 'postcss-nesting';
 //   • postcss-nesting transpiles CSS nesting (& selectors) for Safari 15 compat.
 export default defineConfig({
   plugins: [react()],
+  base: "/",
   css: {
     postcss: {
-      plugins: [postcssNesting()],
+      plugins: [postcssNesting(), mobileMinWidth],
     },
   },
-  base: '/',
   resolve: {
     alias: {
-      '@components': path.resolve(__dirname, 'src/components/srcl'),
-      '@common':     path.resolve(__dirname, 'src/common'),
+      "@components": path.resolve(__dirname, "src/components/srcl"),
+      "@common": path.resolve(__dirname, "src/common"),
     },
   },
   server: {
-    port: 5173,
+    port: 3000,
   },
 });

@@ -30,7 +30,7 @@ export type ContentBlock =
   | { type: "text"; content: string; html?: boolean }
   | { type: "code"; content: string; lang?: string }
   | { type: "image"; src: string; alt?: string; caption?: string }
-  | { type: "quote"; content: string; attribution?: string }
+  | { type: "quote"; content: string; attribution?: string; html?: boolean }
   | { type: "divider" }
   | { type: "heading"; level: 2 | 3 | 4; content: string; html?: boolean }
   | { type: "list"; ordered?: boolean; items: string[]; html?: boolean }
