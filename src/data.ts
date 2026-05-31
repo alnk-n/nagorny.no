@@ -36,7 +36,8 @@ export type ContentBlock =
   | { type: "list"; ordered?: boolean; items: string[]; html?: boolean }
   | { type: "table"; data: string[][] }
   | { type: "callout"; content: string; title?: string; html?: boolean }
-  | { type: "details"; summary: string; content: string; html?: boolean };
+  | { type: "details"; summary: string; content: string; html?: boolean }
+  | { type: "ascii"; content: string; caption?: string };
 
 export interface Project {
   id: string;
