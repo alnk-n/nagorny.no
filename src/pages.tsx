@@ -28,6 +28,7 @@ import Text from "./components/srcl/Text";
 import Window from "./components/srcl/Window";
 import ActionListItem from "./components/srcl/ActionListItem";
 import Accordion from "./components/srcl/Accordion";
+import HoverComponentTrigger from "./components/srcl/HoverComponentTrigger";
 
 // Pick the localized version of a value; fall back to `no` when `en` is absent.
 function loc<T>(locale: Locale, no: T, en: T | undefined): T {
@@ -212,7 +213,9 @@ export function PageAbout() {
             </div>
             <div className="tag-row">
               {g.items.map((it) => (
-                <Badge key={it}>{it}</Badge>
+                <HoverComponentTrigger key={it.name} text={loc(locale, it.desc, it.desc_en)}>
+                  <Badge>{it.name}</Badge>
+                </HoverComponentTrigger>
               ))}
             </div>
           </div>

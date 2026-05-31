@@ -332,8 +332,9 @@ body.theme-dark {
   --theme-button-foreground: var(--color-gray-15);
   --theme-button-background: var(--color-gray-23);
   /* warm amber — phosphor-terminal feel, easier on the eyes than fuchsia */
-  --theme-focused-foreground: oklch(0.78 0.14 72);
-  --theme-focused-foreground-subdued: oklch(0.78 0.14 72 / 0.5);
+  /* hex fallback for Safari 15 / iOS 15 which don't support oklch() */
+  --theme-focused-foreground: #d6ac22;
+  --theme-focused-foreground-subdued: rgba(214, 172, 34, 0.5);
   /*
   NOTE(jimmylee):
   Window body is gray-23 (#3a3a3a) so it lifts off the gray-3 (#080808) page
@@ -353,6 +354,13 @@ ANSI gray scale (#eeeeee → #262626) and the brand color (#e4f221). Each tint
 sets only --tint, and the body.theme-light.tint-* / body.theme-dark.tint-*
 selectors below derive every --theme-* token from that tint via OKLCH math.
 */
+
+@supports (color: oklch(0 0 0)) {
+  body.theme-dark {
+    --theme-focused-foreground: oklch(0.78 0.14 72);
+    --theme-focused-foreground-subdued: oklch(0.78 0.14 72 / 0.5);
+  }
+}
 
 body.tint-green {
   --tint: #39ff44;

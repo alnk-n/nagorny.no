@@ -1,0 +1,9 @@
+.root {
+  display: block;
+  background: var(--theme-border);
+  box-shadow: 0.5ch 0.5ch 0 0 var(--theme-border-subdued);
+  font-weight: 400;
+  max-width: 24ch;
+  padding: 0.25rem 0.5ch;
+  font-size: calc(var(--font-size) * 0.875);
+}

@@ -33,6 +33,7 @@ const mobileMinWidth = {
 //   • `base: '/'` because we serve from a custom-domain GitHub Pages site.
 //     If you ever deploy to `<user>.github.io/<repo>` instead, switch to
 //     `base: '/nagorny.no/'`.
+//   • postcss-nesting transpiles CSS nesting (& selectors) for Safari 15 compat.
 export default defineConfig({
   plugins: [react()],
   base: "/",
