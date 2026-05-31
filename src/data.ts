@@ -203,26 +203,42 @@ export const SKILLS = [
   {
     group: "infrastruktur",
     group_en: "infrastructure",
-    items: ["Linux", "Docker", "Proxmox", "nginx/Caddy"],
+    items: [
+      { name: "Linux", desc: "Primær OS for utvikling og hjemmelabbruk", desc_en: "Primary OS for development and homelab use" },
+      { name: "Docker", desc: "Containerisering av tjenester og applikasjoner", desc_en: "Container runtime for isolated services" },
+      { name: "Proxmox", desc: "Hypervisor for virtuelle maskiner og LXC", desc_en: "Bare-metal hypervisor for VMs and LXC containers" },
+      { name: "nginx/Caddy", desc: "Omvendte proxyer for ruting og TLS", desc_en: "Reverse proxies for routing and TLS termination" },
+    ],
   },
   {
     group: "nettverk",
     group_en: "networking",
-    items: ["VLAN", "pfSense", "Wireshark", "DNS/DHCP", "Wireguard"],
+    items: [
+      { name: "VLAN", desc: "Virtuelt LAN for nettverkssegmentering", desc_en: "Virtual LANs for network segmentation" },
+      { name: "pfSense", desc: "Open-source brannmur og ruter-OS", desc_en: "Open-source firewall and router OS" },
+      { name: "Wireshark", desc: "Pakkeanalyse og nettverksfeilsøking", desc_en: "Packet capture and network traffic analysis" },
+      { name: "DNS/DHCP", desc: "Navneoppløsning og IP-adressetildeling", desc_en: "Name resolution and IP address management" },
+      { name: "Wireguard", desc: "Moderne VPN-protokoll — rask og enkel", desc_en: "Modern VPN protocol — fast and minimal" },
+    ],
   },
   {
     group: "maskinvare",
     group_en: "hardware",
-    items: ["Kabelterminering", "Racking", "Soldering", "3D-print"],
+    items: [
+      { name: "Kabelterminering", desc: "RJ45-crimping og strukturert kabling", desc_en: "RJ45 crimping and structured cabling" },
+      { name: "Racking", desc: "Montering av utstyr i serverstativer", desc_en: "Installing equipment in server racks" },
+      { name: "Soldering", desc: "PCB-reparasjon og tilpassede kabler", desc_en: "PCB rework and custom cable assembly" },
+      { name: "3D-print", desc: "FDM-printing av kabinetter og deler", desc_en: "FDM printing for enclosures and custom parts" },
+    ],
   },
   {
     group: "andre felt",
     group_en: "other fields",
     items: [
-      "Microsoft Office",
-      "Adobe Suite",
-      "Active Directory",
-      "Bash-scripting",
+      { name: "Microsoft Office", desc: "Word, Excel, PowerPoint og OneNote", desc_en: "Word, Excel, PowerPoint and OneNote" },
+      { name: "Adobe Suite", desc: "Photoshop og Illustrator — bilde og design", desc_en: "Photoshop and Illustrator — image and design" },
+      { name: "Active Directory", desc: "Windows-domenestyring og gruppepolicyer", desc_en: "Windows domain management and group policies" },
+      { name: "Bash-scripting", desc: "Shell-automatisering og systemscripting", desc_en: "Shell automation and system scripting" },
     ],
   },
 ];
