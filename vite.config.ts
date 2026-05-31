@@ -1,6 +1,9 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'node:path';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Vite config for nagorny.no
 //   • Aliases match the SRCL source layout (`@components`, `@common`) so the
@@ -10,14 +13,14 @@ import path from 'node:path';
 //     `base: '/nagorny.no/'`.
 export default defineConfig({
   plugins: [react()],
-  base: '/',
+  base: "/",
   resolve: {
     alias: {
-      '@components': path.resolve(__dirname, 'src/components/srcl'),
-      '@common':     path.resolve(__dirname, 'src/common'),
+      "@components": path.resolve(__dirname, "src/components/srcl"),
+      "@common": path.resolve(__dirname, "src/common"),
     },
   },
   server: {
-    port: 5173,
+    port: 3000,
   },
 });
