@@ -81,14 +81,13 @@ type UIStrings = {
 
 const UI: Record<Locale, UIStrings> = {
   no: {
-    sidebar_hint: "Tastatur: ↑/↓ for å bla mellom filer",
+    sidebar_hint: "Tastatur: ↑/↓ eller J/K for å bla mellom filer",
 
     readme_welcome: "Hei! Velkommen til hjemmesiden min.",
     readme_portfolio: "Denne siden brukes som en portfolio og blogg.",
     readme_localization:
       "For å endre språk, trykk på 'EN'/'NO'-knappen øverst.",
-    readme_nav:
-      "For å navigere, klikk på en fil i sidemenyen, eller bruk piltastene.",
+    readme_nav: "For å navigere, bruk sidemenyen, eller bruk ↑/↓ J/K.",
     readme_mobile: "På mobil: trykk «MENU» øverst.",
     readme_built_with: "Bygget med",
     readme_built_lib: "et open-source React-bibliotek.",
@@ -132,14 +131,13 @@ const UI: Record<Locale, UIStrings> = {
   },
 
   en: {
-    sidebar_hint: "Keyboard: ↑/↓ to navigate files",
+    sidebar_hint: "Keyboard: ↑/↓ or J/K to navigate files",
 
     readme_welcome: "Hi! Welcome to my website.",
     readme_portfolio: "This site serves as a portfolio and blog.",
     readme_localization:
       "To switch languages, click the 'EN'/'NO' button at the top.",
-    readme_nav:
-      "To navigate, click a file in the sidebar or use the arrow keys.",
+    readme_nav: "To navigate, use the sidebar, or press ↑/↓ J/K.",
     readme_mobile: "On mobile: tap «MENU» at the top.",
     readme_built_with: "Built with",
     readme_built_lib: "an open-source React library.",
