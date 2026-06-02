@@ -5,3 +5,10 @@ node_modules
 src\data\projects\archived
 src\data\writing\archived
 CLAUDE.md
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
