@@ -237,7 +237,7 @@ export function PageAbout() {
               key={g.text}
               style={{ display: "flex", gap: "1ch", alignItems: "baseline" }}
             >
-              <span className="bullet">▪</span>
+              <span className="bullet">▪︎</span>
               <span>
                 {loc(locale, g.text, g.text_en)}
                 {locale === "en" && !g.text_en && (
@@ -475,7 +475,7 @@ export function PageProjectDetail({ id }: { id: string }) {
               key={i}
               style={{ display: "flex", gap: "1ch", marginBottom: "0.25rem" }}
             >
-              <span className="bullet">▪</span>
+              <span className="bullet">▪︎</span>
               <span>{l}</span>
             </li>
           ))}

@@ -135,7 +135,7 @@
 }
 .page-head .meta {
   color: var(--theme-text);
-  opacity: 0.6;
+  opacity: 0.7;
   font-size: var(--font-size);
 }
 
@@ -151,7 +151,7 @@
 .hero-ascii::-webkit-scrollbar { display: none; }
 
 .kv { display: grid; grid-template-columns: minmax(0, 16ch) 1fr; column-gap: 2ch; row-gap: 0; }
-.kv .k { opacity: 0.7; }
+.kv .k { opacity: 0.75; }
 
 .resume-list {
   display: flex;
@@ -177,7 +177,7 @@
   background: var(--theme-text);
 }
 .resume-entry .k {
-  opacity: 0.55;
+  opacity: 0.65;
   font-size: calc(var(--font-size) * 0.85);
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -209,9 +209,9 @@
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-.article-heading-2 { font-size: var(--font-size); }
-.article-heading-3 { font-size: var(--font-size); opacity: 0.7; }
-.article-heading-4 { font-size: var(--font-size); opacity: 0.5; }
+.article-heading-2 { font-size: calc(var(--font-size) * 1.125); }
+.article-heading-3 { font-size: var(--font-size); opacity: 0.85; }
+.article-heading-4 { font-size: var(--font-size); opacity: 0.65; }
 
 .article-list {
   margin-top: 0.75rem;
@@ -246,7 +246,7 @@
 }
 
 .aside-hint {
-  opacity: 0.6;
+  opacity: 0.7;
   font-size: calc(var(--font-size) * 0.9);
   margin-top: 1.25rem;
 }
