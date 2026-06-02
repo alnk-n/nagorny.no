@@ -4,6 +4,8 @@ import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import postcssNesting from "postcss-nesting";
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Wraps any hardcoded min-width (ch, px, em, rem, vw…) with min(value, 100%)
@@ -35,7 +37,7 @@ const mobileMinWidth = {
 //     `base: '/nagorny.no/'`.
 //   • postcss-nesting transpiles CSS nesting (& selectors) for Safari 15 compat.
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), cloudflare()],
   base: "/",
   css: {
     postcss: {
