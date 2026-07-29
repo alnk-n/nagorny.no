@@ -205,7 +205,7 @@ export function PageAbout() {
         </Text>
       </Window>
 
-      <Card title="STACK" mode="left">
+      <Card title={t.about_stack_card} mode="left">
         {SKILLS.map((g) => (
           <div key={g.group} style={{ marginBottom: "0.5rem" }}>
             <div style={{ opacity: 0.7, textTransform: "uppercase" }}>
@@ -222,7 +222,7 @@ export function PageAbout() {
         ))}
       </Card>
 
-      <Card title="CERTS" mode="left">
+      <Card title={t.about_certs_card} mode="left">
         <div className="tag-row">
           {CERTS.flatMap((g) => g.items).map((it) => (
             <Badge key={it}>{it}</Badge>

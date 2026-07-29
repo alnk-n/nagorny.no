@@ -204,41 +204,114 @@ export const SKILLS = [
     group: "infrastruktur",
     group_en: "infrastructure",
     items: [
-      { name: "Linux", desc: "Primær OS for utvikling og hjemmelabbruk", desc_en: "Primary OS for development and homelab use" },
-      { name: "Docker", desc: "Containerisering av tjenester og applikasjoner", desc_en: "Container runtime for isolated services" },
-      { name: "Proxmox", desc: "Hypervisor for virtuelle maskiner og LXC", desc_en: "Bare-metal hypervisor for VMs and LXC containers" },
-      { name: "nginx/Caddy", desc: "Omvendte proxyer for ruting og TLS", desc_en: "Reverse proxies for routing and TLS termination" },
+      {
+        name: "Linux",
+        desc: "Primær-OS for personlig bruk",
+        desc_en: "Primary OS for personal use",
+      },
+      {
+        name: "Docker",
+        desc: "Containerisering av tjenester",
+        desc_en: "Containerization of services",
+      },
+      {
+        name: "Proxmox",
+        desc: "Hypervisor for VM-er og LXC-containere",
+        desc_en: "Hypervisor for VMs and LXC containers",
+      },
+      {
+        name: "nginx/Caddy",
+        desc: "Reverse-Proxies for ruting og TLS",
+        desc_en: "Reverse proxies for routing and TLS",
+      },
     ],
   },
   {
     group: "nettverk",
     group_en: "networking",
     items: [
-      { name: "VLAN", desc: "Virtuelt LAN for nettverkssegmentering", desc_en: "Virtual LANs for network segmentation" },
-      { name: "pfSense", desc: "Open-source brannmur og ruter-OS", desc_en: "Open-source firewall and router OS" },
-      { name: "Wireshark", desc: "Pakkeanalyse og nettverksfeilsøking", desc_en: "Packet capture and network traffic analysis" },
-      { name: "DNS/DHCP", desc: "Navneoppløsning og IP-adressetildeling", desc_en: "Name resolution and IP address management" },
-      { name: "Wireguard", desc: "Moderne VPN-protokoll — rask og enkel", desc_en: "Modern VPN protocol — fast and minimal" },
+      {
+        name: "VLAN",
+        desc: "Nettverkssegmentering",
+        desc_en: "Network segmentation",
+      },
+      {
+        name: "OPNsense",
+        desc: "Open-source ruter-OS",
+        desc_en: "Open-source router OS",
+      },
+      {
+        name: "Wireshark",
+        desc: "Pakkeanalyse og feilsøking",
+        desc_en: "Packet capture and traffic analysis",
+      },
+      {
+        name: "DNS/DHCP",
+        desc: "Navneoppløsning og IP-adressetildeling",
+        desc_en: "Name resolution and IP address management",
+      },
+      {
+        name: "Wireguard/Tailscale",
+        desc: "Moderne VPN-protokoller for sikker tilgang",
+        desc_en: "Modern VPN protocols for secure access",
+      },
     ],
   },
   {
     group: "maskinvare",
     group_en: "hardware",
     items: [
-      { name: "Kabelterminering", desc: "RJ45-crimping og strukturert kabling", desc_en: "RJ45 crimping and structured cabling" },
-      { name: "Racking", desc: "Montering av utstyr i serverstativer", desc_en: "Installing equipment in server racks" },
-      { name: "Soldering", desc: "PCB-reparasjon og tilpassede kabler", desc_en: "PCB rework and custom cable assembly" },
-      { name: "3D-print", desc: "FDM-printing av kabinetter og deler", desc_en: "FDM printing for enclosures and custom parts" },
+      {
+        name: "Kabelterminering",
+        desc: "RJ45-crimping og ryddig kabelføring",
+        desc_en: "RJ45 crimping and cable management",
+      },
+      {
+        name: "Elektronikkreparasjon",
+        desc: "Reparasjon og vedlikehold av elektroniske enheter",
+        desc_en: "Repair and maintenance of electronic devices",
+      },
+      {
+        name: "Racking",
+        desc: "Montering av utstyr i serverstativer",
+        desc_en: "Installing equipment in server racks",
+      },
+      {
+        name: "Soldering",
+        desc: "Enkel PCB-reparasjon med SMC-komponenter",
+        desc_en: "Basic PCB repair with SMC components",
+      },
+      {
+        name: "3D-print",
+        desc: "FDM-printing med PLA, ABS and TPU",
+        desc_en: "FDM printing with PLA, ABS and TPU",
+      },
     ],
   },
   {
     group: "andre felt",
     group_en: "other fields",
     items: [
-      { name: "Microsoft Office", desc: "Word, Excel, PowerPoint og OneNote", desc_en: "Word, Excel, PowerPoint and OneNote" },
-      { name: "Adobe Suite", desc: "Photoshop og Illustrator — bilde og design", desc_en: "Photoshop and Illustrator — image and design" },
-      { name: "Active Directory", desc: "Windows-domenestyring og gruppepolicyer", desc_en: "Windows domain management and group policies" },
-      { name: "Bash-scripting", desc: "Shell-automatisering og systemscripting", desc_en: "Shell automation and system scripting" },
+      {
+        name: "Microsoft Office",
+        desc: "Word, Excel, PowerPoint og OneNote",
+        desc_en: "Word, Excel, PowerPoint and OneNote",
+      },
+      {
+        name: "Adobe Suite",
+        desc: "Photoshop, Premiere, Illustrator, XD osv.",
+        desc_en: "Photoshop, Premiere, Illustrator, XD etc.",
+      },
+      {
+        name: "Active Directory",
+        desc: "Windows-domenestyring og gruppepolicyer",
+        desc_en: "Windows domain management and group policies",
+      },
+      {
+        name: "Bash-scripting",
+        desc: "Shell-automatisering og scripting",
+        desc_en: "Shell automation and scripting",
+      },
     ],
   },
 ];

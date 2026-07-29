@@ -40,6 +40,8 @@ type UIStrings = {
   about_hobbies: string;
   about_availability: string;
   about_goals_card: string;
+  about_stack_card: string;
+  about_certs_card: string;
 
   // PageNow
   now_description: string;
@@ -99,6 +101,8 @@ const UI: Record<Locale, UIStrings> = {
       "På fritiden skrur jeg på datautstyr, lodder, og eksperimenterer med programvare. Operativsystemer (hovedsakelig Linux) og nettverk er særlig interesserende.",
     about_availability: "Snakker norsk, engelsk og polsk.",
     about_goals_card: "MÅL FOR 2026",
+    about_stack_card: "FERDIGHETER",
+    about_certs_card: "SERTIFISERINGER",
 
     now_description: "side. Hva jeg jobber med akkurat nå.",
     now_updated: "sist oppdatert 2026-05-24",
@@ -149,6 +153,8 @@ const UI: Record<Locale, UIStrings> = {
       "In my spare time I tinker with hardware, solder, and experiment with software. Operating systems (mainly Linux) and networking are particularly interesting to me.",
     about_availability: "Speaks Norwegian, English, and Polish.",
     about_goals_card: "GOALS FOR 2026",
+    about_stack_card: "SKILLS",
+    about_certs_card: "CERTIFICATIONS",
 
     now_description: "page. What I'm currently working on.",
     now_updated: "last updated 2026-05-24",
