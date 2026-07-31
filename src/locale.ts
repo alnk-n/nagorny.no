@@ -152,9 +152,9 @@ const UI: Record<Locale, UIStrings> = {
     readme_btn_projects: "Prosjekter →",
     readme_btn_writing: "Blogg →",
 
-    about_bio: "17 år, avgangselev på VG2 IT ved Tiller VGS.",
+    about_bio: "18 år, fersk lærling.",
     about_hobbies:
-      "På fritiden skrur jeg på datautstyr, lodder, og eksperimenterer med programvare. Operativsystemer (hovedsakelig Linux) og nettverk er særlig interesserende.",
+      "På fritiden skrur jeg på elektronikk, lodder, og eksperimenterer med programvare. Operativsystemer (hovedsakelig Linux) og homelabbing er særlig interesserende.",
     about_availability: "Snakker norsk, engelsk og polsk.",
     about_goals_card: "MÅL FOR 2026",
     about_stack_card: "FERDIGHETER",
@@ -220,9 +220,9 @@ const UI: Record<Locale, UIStrings> = {
     readme_btn_projects: "Projects →",
     readme_btn_writing: "Blog →",
 
-    about_bio: "17 years old, graduating IT student at Tiller VGS.",
+    about_bio: "18 years old, newly apprenticed.",
     about_hobbies:
-      "In my spare time I tinker with hardware, solder, and experiment with software. Operating systems (mainly Linux) and networking are particularly interesting to me.",
+      "In my spare time I tinker with hardware, solder, and experiment with software. Operating systems (mainly Linux) and homelabbing are particularly interesting to me.",
     about_availability: "Speaks Norwegian, English, and Polish.",
     about_goals_card: "GOALS FOR 2026",
     about_stack_card: "SKILLS",

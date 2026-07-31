@@ -217,7 +217,7 @@ export function PageAbout() {
       <div className="page-head">
         <h1>about.md</h1>
         <span className="meta">
-          {t.about_last_edit_prefix} · 2026-05-24 · {metaSize}
+          {t.about_last_edit_prefix} · 2026-07-31 · {metaSize}
         </span>
       </div>
 
