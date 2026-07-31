@@ -72,12 +72,11 @@ export interface Post {
 
 export const IDENTITY = {
   name: "Alan Krystian Nagorny",
-  role: "2VG IT · Tiller VGS",
   location: "Trondheim, NO",
   email: "alan@nagorny.no",
   github: "@alnk-n",
-  available: "Starter som IT-lærling høsten 2026",
-  available_en: "Starting as an IT apprentice in autumn 2026",
+  available: "IT-lærling ved Garnes Data Trondheim",
+  available_en: "IT-apprentice at Garnes Data Trondheim",
 };
 
 const projectJsonFiles = import.meta.glob<Project>("./data/projects/*.json", {
@@ -168,8 +167,20 @@ export const WRITING: Post[] = Array.from(writingJsonMap.values())
 
 export const RESUME = [
   {
-    period: "okt.2025-nå",
-    period_en: "oct.2025-present",
+    period: "aug.2026-aug.2028",
+    period_en: "aug.2026-aug.2028",
+    what: "IT-lærling ved Garnes Data Trondheim",
+    what_en: "IT-apprentice at Garnes Data Trondheim",
+  },
+  {
+    period: "jun.2025-jul.2026",
+    period_en: "jun.2025-jul.2026",
+    what: "Kjøkkenhjelp ved St. Olavs Hospital",
+    what_en: "Kitchen helper at St. Olavs Hospital",
+  },
+  {
+    period: "okt.2025-mar.2026",
+    period_en: "oct.2025-mar.2026",
     what: "Diverse utplasseringer ved Garnes Data",
     what_en: "Various internships at Garnes Data",
   },
