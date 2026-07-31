@@ -205,7 +205,13 @@ export function PageAbout() {
           hobbies: t.about_hobbies,
           availability: loc(locale, IDENTITY.available, IDENTITY.available_en),
           availabilityText: t.about_availability,
-          skills: SKILLS,
+          skills: SKILLS.map((g) => ({
+            group: loc(locale, g.group, g.group_en),
+            items: g.items.map((it) => ({
+              name: it.name,
+              desc: loc(locale, it.desc, it.desc_en),
+            })),
+          })),
           certs: CERTS,
           goals: GOALS.map((g) => loc(locale, g.text, g.text_en)),
         }),
