@@ -21,6 +21,30 @@ Push to `main` — Cloudflare Pages builds and deploys automatically.
 
 ---
 
+## Archiving a goal or "now" item
+
+`src/data/goals.json` and `src/data/now.json` hold items with a `createdAt`
+date. Archiving stamps an item with today's date as `archivedAt` instead of
+deleting it.
+
+```bash
+npm run archive -- <goals|now> <1-based-index>
+```
+
+- `<goals|now>`: which collection to edit
+- `<1-based-index>`: item position in the JSON array, 1 = first item
+
+Example, archive the 2nd item in `now.json`:
+
+```bash
+npm run archive -- now 2
+```
+
+Keep the `--` before the arguments, npm needs it to pass them through to the
+script. Running it on an already-archived item is a no-op.
+
+---
+
 ## Writing a blog post
 
 Create `src/data/writing/<slug>.md`:
