@@ -39,7 +39,7 @@ const ASCII_HERO = String.raw`
  | |/ / _// /__/ ,< / /_/ / /|_/ / /|_/ / _//    /
  |___/___/____/_/|_|\____/_/  /_/_/  /_/___/_/|_/
 
-   Alan Krystian Nagorny ▹ VG2 IT ▹ Tiller VGS, NO
+   Alan Krystian Nagorny ▹ Lærling ▹ Garnes Data Trondheim
 `;
 
 // Replace with your English ASCII art
@@ -49,7 +49,7 @@ const ASCII_HERO_EN = String.raw`
  | |/ |/ / -_) / __/ _ \/  ' \/ -_)
  |__/|__/\__/_/\__/\___/_/_/_/\__/ 
  
-   Alan Krystian Nagorny ▹ VG2 IT ▹ Tiller VGS, NO
+   Alan Krystian Nagorny ▹ Apprentice ▹ Garnes Data Trondheim
 `;
 
 function useClock() {
