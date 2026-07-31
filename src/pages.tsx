@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   CERTS,
   ContentBlock,
+  EDUCATION,
   GOALS,
   IDENTITY,
   NOW,
@@ -341,10 +342,10 @@ export function PageResume() {
             period: loc(locale, r.period, r.period_en),
             what: loc(locale, r.what, r.what_en),
           })),
-          edu1Period: t.resume_edu1_period,
-          edu1Text: t.resume_edu1_text,
-          edu2Period: t.resume_edu2_period,
-          edu2Text: t.resume_edu2_text,
+          education: EDUCATION.map((e) => ({
+            period: loc(locale, e.period, e.period_en),
+            what: loc(locale, e.what, e.what_en),
+          })),
           refs: t.resume_refs_text,
         }),
       ),
@@ -370,14 +371,12 @@ export function PageResume() {
 
       <Card title={t.resume_education} mode="left">
         <div className="resume-list">
-          <div className="resume-entry">
-            <span className="k">{t.resume_edu1_period}</span>
-            <span>{t.resume_edu1_text}</span>
-          </div>
-          <div className="resume-entry">
-            <span className="k">{t.resume_edu2_period}</span>
-            <span>{t.resume_edu2_text}</span>
-          </div>
+          {EDUCATION.map((e, i) => (
+            <div key={i} className="resume-entry">
+              <span className="k">{loc(locale, e.period, e.period_en)}</span>
+              <span>{loc(locale, e.what, e.what_en)}</span>
+            </div>
+          ))}
         </div>
       </Card>
 

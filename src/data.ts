@@ -346,3 +346,18 @@ export const CERTS = [
     items: ["Networking Basics (Cisco)"],
   },
 ];
+
+export const EDUCATION = [
+  {
+    period: "2024-2026",
+    period_en: "2024-2026",
+    what: "Tiller VGS · IT & medieproduksjon VG1 -> IT VG2",
+    what_en: "Tiller VGS · IT & media production grade 11 -> IT grade 12",
+  },
+  {
+    period: "2021-2024",
+    period_en: "2021-2024",
+    what: "Sverresborg Ungdomsskole · 8-10. klasse",
+    what_en: "Sverresborg Lower Secondary School · 8th-10th grade",
+  },
+];
