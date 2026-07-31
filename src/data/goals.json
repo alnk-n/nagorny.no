@@ -2,12 +2,24 @@
   {
     "text": "Ta førerkortet i løpet av sommeren.",
     "text_en": "Get my driver's licence during the summer.",
-    "createdAt": "2026-05-24"
+    "createdAt": "2026-05-24",
+    "archivedAt": "2026-07-31"
   },
   {
     "text": "Forstå grunnleggende konsepter i lavspennings-elektronikk.",
     "text_en": "Understand the fundamentals of low-voltage electronics.",
-    "createdAt": "2026-05-24"
+    "createdAt": "2026-05-24",
+    "archivedAt": "2026-07-31"
+  },
+  {
+    "text": "Forbedre min og familien sin cyber-sikkerhet.",
+    "text_en": "Improve mine and my family's cyber security.",
+    "createdAt": "2026-07-31"
+  },
+  {
+    "text": "Spar opp nok penger til å reise til Kina med vennene mine.",
+    "text_en": "Save up enough money to travel to China with my friends.",
+    "createdAt": "2026-07-31"
   },
   {
     "text": "Skrive 12 bloggposter (1 per måned).",
@@ -15,8 +27,8 @@
     "createdAt": "2026-05-24"
   },
   {
-    "text": "Sykle til jobb så ofte som mulig i perioden august → oktober.",
-    "text_en": "Cycle to work as often as possible during August → October.",
+    "text": "Sykle til jobb så ofte som mulig i perioden august - oktober.",
+    "text_en": "Cycle to work as often as possible during August - October.",
     "createdAt": "2026-05-24"
   }
 ]
