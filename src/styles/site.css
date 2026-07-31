@@ -4,6 +4,7 @@
    a few content scaffolding helpers we don't get out-of-the-box. */
 
 .site {
+  --topbar-height: calc(var(--theme-line-height-base) * 1rem);
   display: grid;
   grid-template-columns: minmax(30ch, 36ch) 1fr;
   grid-template-rows: auto 1fr;
@@ -12,15 +13,20 @@
   margin: 0 auto;
 }
 
-.site-nav { grid-column: 1 / -1; }
+.site-nav {
+  grid-column: 1 / -1;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-page-modals);
+}
 
 .site-aside {
   grid-row: 2;
   padding: 1ch 1ch 2ch;
   border-right: 2px solid var(--theme-text);
   position: sticky;
-  top: 0;
-  height: 100vh;
+  top: var(--topbar-height);
+  height: calc(100vh - var(--topbar-height));
   overflow-y: auto;
   overflow-x: auto;
   background: var(--theme-background);
