@@ -66,6 +66,9 @@ const TopBar: React.FC<Props> = ({
           <button
             className="srcl-logo-like"
             onClick={() => setLocale(locale === "no" ? "en" : "no")}
+            title={
+              locale === "no" ? t.topbar_switch_to_en_aria : t.topbar_switch_to_no_aria
+            }
             aria-label={
               locale === "no" ? t.topbar_switch_to_en_aria : t.topbar_switch_to_no_aria
             }
@@ -79,6 +82,7 @@ const TopBar: React.FC<Props> = ({
                 t === "theme-light" ? "theme-dark" : "theme-light",
               )
             }
+            title={t.topbar_toggle_theme_title}
           >
             {theme === "theme-light" ? "◐ dark" : "◑ light"}
           </button>

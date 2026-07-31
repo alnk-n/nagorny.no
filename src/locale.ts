@@ -56,6 +56,7 @@ type UIStrings = {
   topbar_cycle_tint_title: string;
   topbar_switch_to_en_aria: string;
   topbar_switch_to_no_aria: string;
+  topbar_toggle_theme_title: string;
 
   // PageReadme
   readme_welcome: string;
@@ -135,6 +136,7 @@ const UI: Record<Locale, UIStrings> = {
     topbar_cycle_tint_title: "bytt fargetone",
     topbar_switch_to_en_aria: "bytt til engelsk",
     topbar_switch_to_no_aria: "bytt til norsk",
+    topbar_toggle_theme_title: "bytt lyst/mørkt tema",
 
     readme_welcome: "Hei! Velkommen til hjemmesiden min.",
     readme_portfolio: "Denne siden brukes som en portfolio og blogg.",
@@ -206,6 +208,7 @@ const UI: Record<Locale, UIStrings> = {
     topbar_cycle_tint_title: "cycle tint",
     topbar_switch_to_en_aria: "switch to English",
     topbar_switch_to_no_aria: "switch to Norwegian",
+    topbar_toggle_theme_title: "toggle light/dark theme",
 
     readme_welcome: "Hi! Welcome to my website.",
     readme_portfolio: "This site serves as a portfolio and blog.",
