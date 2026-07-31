@@ -1,7 +1,7 @@
 // pages.tsx — page bodies for every route. One file because the site is small
 // and a flat layout is easier to navigate than ten one-page files.
 
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import {
@@ -10,12 +10,14 @@ import {
   GOALS,
   IDENTITY,
   NOW,
+  NOW_UPDATED,
   PROJECTS,
   RESUME,
   SKILLS,
   WRITING,
 } from "./data";
 import { Locale, loc, useLocale, useT } from "./locale";
+import { byteSize, formatBytes } from "@common/utilities";
 
 import Badge from "./components/srcl/Badge";
 import BreadCrumbs from "./components/srcl/BreadCrumbs";
@@ -111,13 +113,32 @@ function useScramble(target: string, duration = 900): string {
 export function PageReadme() {
   const time = useClock();
   const { locale } = useLocale();
-  const hero = useScramble(locale === "en" ? ASCII_HERO_EN : ASCII_HERO);
+  const asciiTarget = locale === "en" ? ASCII_HERO_EN : ASCII_HERO;
+  const hero = useScramble(asciiTarget);
   const t = useT();
+  const metaSize = useMemo(
+    () =>
+      formatBytes(
+        byteSize({
+          hero: asciiTarget,
+          welcome: t.readme_welcome,
+          portfolio: t.readme_portfolio,
+          localization: String(t.readme_localization),
+          nav: t.readme_nav,
+          mobile: t.readme_mobile,
+          builtWith: t.readme_built_with,
+          builtLib: t.readme_built_lib,
+        }),
+      ),
+    [asciiTarget, t],
+  );
   return (
     <>
       <div className="page-head">
         <h1>readme.md</h1>
-        <span className="meta">root · {time} · 2.7kb</span>
+        <span className="meta">
+          root · {time} · {metaSize}
+        </span>
       </div>
 
       <pre className="hero-ascii">{hero}</pre>
@@ -175,11 +196,26 @@ export function PageReadme() {
 export function PageAbout() {
   const t = useT();
   const { locale } = useLocale();
+  const metaSize = useMemo(
+    () =>
+      formatBytes(
+        byteSize({
+          bio: t.about_bio,
+          hobbies: t.about_hobbies,
+          availability: loc(locale, IDENTITY.available, IDENTITY.available_en),
+          availabilityText: t.about_availability,
+          skills: SKILLS,
+          certs: CERTS,
+          goals: GOALS.map((g) => loc(locale, g.text, g.text_en)),
+        }),
+      ),
+    [locale, t],
+  );
   return (
     <>
       <div className="page-head">
         <h1>about.md</h1>
-        <span className="meta">last edit · 2026-05-24 · 1.84kb</span>
+        <span className="meta">last edit · 2026-05-24 · {metaSize}</span>
       </div>
 
       <Window>
@@ -250,7 +286,7 @@ export function PageNow() {
     <>
       <div className="page-head">
         <h1>now.log</h1>
-        <span className="meta">tail · live · 2026-05-24</span>
+        <span className="meta">tail · live · {NOW_UPDATED}</span>
       </div>
       <Window>
         <Text style={{ opacity: 0.7, marginBottom: "1rem" }}>
@@ -279,7 +315,7 @@ export function PageNow() {
           <Divider />
         </div>
         <Text style={{ marginTop: "0.75rem", opacity: 0.6 }}>
-          {t.now_updated}
+          {t.now_updated_prefix} {NOW_UPDATED}
         </Text>
       </Window>
     </>
@@ -290,11 +326,28 @@ export function PageNow() {
 export function PageResume() {
   const t = useT();
   const { locale } = useLocale();
+  const metaSize = useMemo(
+    () =>
+      formatBytes(
+        byteSize({
+          resume: RESUME.map((r) => ({
+            period: loc(locale, r.period, r.period_en),
+            what: loc(locale, r.what, r.what_en),
+          })),
+          edu1Period: t.resume_edu1_period,
+          edu1Text: t.resume_edu1_text,
+          edu2Period: t.resume_edu2_period,
+          edu2Text: t.resume_edu2_text,
+          refs: t.resume_refs_text,
+        }),
+      ),
+    [locale, t],
+  );
   return (
     <>
       <div className="page-head">
         <h1>resume.txt</h1>
-        <span className="meta">view · 1.18kb</span>
+        <span className="meta">view · {metaSize}</span>
       </div>
 
       <Card title={t.resume_experience} mode="left">
@@ -331,23 +384,23 @@ export function PageResume() {
 // ── /contact.conf ─────────────────────────────────────────────────────────
 export function PageContact() {
   const t = useT();
-  return (
-    <>
-      <div className="page-head">
-        <h1>contact.conf</h1>
-        <span className="meta">cleartext · 917b</span>
-      </div>
-      <Window>
-        <CodeBlock>
-          {`[identity]
+  const confText = `[identity]
 name     = ${IDENTITY.name}
 location = ${IDENTITY.location}
 timezone = Europe/Oslo (UTC+1)
 
 [network]
 mail     = ${IDENTITY.email}
-github   = ${IDENTITY.github}`}
-        </CodeBlock>
+github   = ${IDENTITY.github}`;
+  const metaSize = formatBytes(byteSize(confText));
+  return (
+    <>
+      <div className="page-head">
+        <h1>contact.conf</h1>
+        <span className="meta">cleartext · {metaSize}</span>
+      </div>
+      <Window>
+        <CodeBlock>{confText}</CodeBlock>
         <div className="btn-row">
           <a className="btn-primary" href={`mailto:${IDENTITY.email}`}>
             {t.contact_send_email}

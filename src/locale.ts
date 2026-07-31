@@ -84,7 +84,7 @@ type UIStrings = {
 
   // PageNow
   now_description: string;
-  now_updated: string;
+  now_updated_prefix: string;
 
   // PageResume
   resume_experience: string;
@@ -164,7 +164,7 @@ const UI: Record<Locale, UIStrings> = {
     about_certs_card: "SERTIFISERINGER",
 
     now_description: "side. Hva jeg jobber med akkurat nå.",
-    now_updated: "sist oppdatert 2026-05-24",
+    now_updated_prefix: "sist oppdatert",
 
     resume_experience: "ERFARING",
     resume_education: "UTDANNING",
@@ -235,7 +235,7 @@ const UI: Record<Locale, UIStrings> = {
     about_certs_card: "CERTIFICATIONS",
 
     now_description: "page. What I'm currently working on.",
-    now_updated: "last updated 2026-05-24",
+    now_updated_prefix: "last updated",
 
     resume_experience: "EXPERIENCE",
     resume_education: "EDUCATION",

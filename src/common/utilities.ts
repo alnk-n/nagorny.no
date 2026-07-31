@@ -19,3 +19,12 @@ export function leftPad(input: string, length: number, char = ' '): string {
   if (zerosNeeded <= 0) return input;
   return char.repeat(zerosNeeded) + input;
 }
+
+export function byteSize(value: string | object): number {
+  const s = typeof value === 'string' ? value : JSON.stringify(value);
+  return new TextEncoder().encode(s).length;
+}
+
+export function formatBytes(bytes: number): string {
+  return bytes < 1000 ? `${bytes}b` : `${(bytes / 1024).toFixed(2)}kb`;
+}

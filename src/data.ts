@@ -32,6 +32,14 @@ export const NOW: NowItem[] = (nowRaw as NowItem[]).filter(
   (n) => !n.archivedAt,
 );
 
+// Latest touch (create or archive) across every now.json entry — reflects
+// when the file itself was last edited, not just when the visible list changed.
+const nowTouchDates = (nowRaw as NowItem[])
+  .flatMap((n) => [n.createdAt, n.archivedAt])
+  .filter((d): d is string => !!d)
+  .sort();
+export const NOW_UPDATED: string = nowTouchDates[nowTouchDates.length - 1];
+
 export type ContentBlock =
   | { type: "text"; content: string; html?: boolean }
   | { type: "code"; content: string; lang?: string }
