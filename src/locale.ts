@@ -81,6 +81,7 @@ type UIStrings = {
   about_goals_card: string;
   about_stack_card: string;
   about_certs_card: string;
+  about_last_edit_prefix: string;
 
   // PageNow
   now_description: string;
@@ -162,6 +163,7 @@ const UI: Record<Locale, UIStrings> = {
     about_goals_card: "MÅL FOR 2026",
     about_stack_card: "FERDIGHETER",
     about_certs_card: "SERTIFISERINGER",
+    about_last_edit_prefix: "sist endret",
 
     now_description: "side. Hva jeg jobber med akkurat nå.",
     now_updated_prefix: "sist oppdatert",
@@ -233,6 +235,7 @@ const UI: Record<Locale, UIStrings> = {
     about_goals_card: "GOALS FOR 2026",
     about_stack_card: "SKILLS",
     about_certs_card: "CERTIFICATIONS",
+    about_last_edit_prefix: "last edit",
 
     now_description: "page. What I'm currently working on.",
     now_updated_prefix: "last updated",

@@ -215,7 +215,9 @@ export function PageAbout() {
     <>
       <div className="page-head">
         <h1>about.md</h1>
-        <span className="meta">last edit · 2026-05-24 · {metaSize}</span>
+        <span className="meta">
+          {t.about_last_edit_prefix} · 2026-05-24 · {metaSize}
+        </span>
       </div>
 
       <Window>
@@ -237,7 +239,10 @@ export function PageAbout() {
             </div>
             <div className="tag-row">
               {g.items.map((it) => (
-                <HoverComponentTrigger key={it.name} text={loc(locale, it.desc, it.desc_en)}>
+                <HoverComponentTrigger
+                  key={it.name}
+                  text={loc(locale, it.desc, it.desc_en)}
+                >
                   <Badge>{it.name}</Badge>
                 </HoverComponentTrigger>
               ))}
@@ -286,7 +291,9 @@ export function PageNow() {
     <>
       <div className="page-head">
         <h1>now.log</h1>
-        <span className="meta">tail · live · {NOW_UPDATED}</span>
+        <span className="meta">
+          {t.now_updated_prefix} · {NOW_UPDATED}
+        </span>
       </div>
       <Window>
         <Text style={{ opacity: 0.7, marginBottom: "1rem" }}>
@@ -457,7 +464,8 @@ export function PageProjectDetail({ id }: { id: string }) {
   const t = useT();
   const { locale } = useLocale();
   const p = PROJECTS.find((x) => x.id === id) || PROJECTS[0];
-  const langMismatch = p.lang && p.lang !== locale && !loc(locale, p.body_en, p.body);
+  const langMismatch =
+    p.lang && p.lang !== locale && !loc(locale, p.body_en, p.body);
   return (
     <>
       <BreadCrumbs
@@ -802,7 +810,8 @@ export function PageWritingDetail({ slug }: { slug: string }) {
   const w = WRITING.find((x) => x.slug === slug) || WRITING[0];
   const readTime = w.readTime ? `~${w.readTime} min` : "draft";
   const body = loc(locale, w.body, w.body_en);
-  const langMismatch = w.lang && w.lang !== locale && !loc(locale, w.body_en, w.body);
+  const langMismatch =
+    w.lang && w.lang !== locale && !loc(locale, w.body_en, w.body);
   return (
     <>
       <BreadCrumbs
