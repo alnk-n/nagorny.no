@@ -91,10 +91,6 @@ type UIStrings = {
   resume_experience: string;
   resume_education: string;
   resume_references: string;
-  resume_edu1_period: string;
-  resume_edu1_text: string;
-  resume_edu2_period: string;
-  resume_edu2_text: string;
   resume_refs_text: string;
 
   // PageProjectsIndex + PageProjectDetail
@@ -171,10 +167,6 @@ const UI: Record<Locale, UIStrings> = {
     resume_experience: "ERFARING",
     resume_education: "UTDANNING",
     resume_references: "REFERANSER",
-    resume_edu1_period: "2024-nå",
-    resume_edu1_text: "Tiller VGS · IT VG2 · IT & medieproduksjon VG1.",
-    resume_edu2_period: "2021-2024",
-    resume_edu2_text: "Sverresborg ungdomsskole.",
     resume_refs_text: "Tilgjengelig på forespørsel - kontakt via e-post.",
 
     project_arch: "ARKITEKTUR",
@@ -243,12 +235,7 @@ const UI: Record<Locale, UIStrings> = {
     resume_experience: "EXPERIENCE",
     resume_education: "EDUCATION",
     resume_references: "REFERENCES",
-    resume_edu1_period: "2024-present",
-    resume_edu1_text:
-      "Tiller VGS · IT grade 11 · IT & media production grade 10.",
-    resume_edu2_period: "2021-2024",
-    resume_edu2_text: "Sverresborg Lower Secondary School.",
-    resume_refs_text: "Available on request — contact via email.",
+    resume_refs_text: "Available on request - contact via email.",
 
     project_arch: "ARCHITECTURE",
     project_learnings: "KEY TAKEAWAYS",
