@@ -15,14 +15,47 @@ export const LocaleContext = React.createContext<LocaleCtx>({
 export const useLocale = () => React.useContext(LocaleContext);
 export const useT = () => UI[React.useContext(LocaleContext).locale];
 
+// Picks the localized value of a bilingual content field (see src/data.ts),
+// falling back to `no` when `en` is absent (content may only be authored in
+// Norwegian). Unlike the UI catalog below, `en` here is optional per-field.
+export function loc<T>(locale: Locale, no: T, en: T | undefined): T {
+  return locale === "en" && en !== undefined ? en : no;
+}
+
 // ---------------------------------------------------------------------------
-// UI string catalog — all translatable non-button, non-identity, non-tree-view
+// UI string catalog. All translatable non-button, non-identity, non-tree-view
 // strings on the site. Both locales must have identical keys (enforced by type).
+//
+// This is one of two bilingual conventions in the codebase, and deliberately
+// stricter than the other:
+//   - UI chrome text (labels, headings, aria-labels, tooltips) lives here and
+//     is REQUIRED in both locales.
+//   - Bilingual content data (goals, now, projects, writing, resume, skills)
+//     uses optional `_en`-suffixed sibling fields instead,
+//     resolved with `loc()` above, because that content is loaded from JSON/
+//     Markdown and sometimes only exists in Norwegian (a "(NO)" badge covers
+//     the gap). Don't blend the two: chrome text must never fall back silently.
+//
+// Proper nouns and brand terms (e.g. "SRCL", "GitHub") are exempt from
+// translation by design and are left as plain string literals at their call
+// sites rather than catalog entries.
 // ---------------------------------------------------------------------------
 
 type UIStrings = {
   // Sidebar
   sidebar_hint: string;
+  sidebar_file_tree_heading: string;
+  sidebar_shortcuts_heading: string;
+  sidebar_close_menu_aria: string;
+  sidebar_shortcut_mail: string;
+  sidebar_shortcut_resume: string;
+  sidebar_shortcut_now: string;
+
+  // TopBar
+  topbar_open_menu_aria: string;
+  topbar_cycle_tint_title: string;
+  topbar_switch_to_en_aria: string;
+  topbar_switch_to_no_aria: string;
 
   // PageReadme
   readme_welcome: string;
@@ -34,6 +67,11 @@ type UIStrings = {
   readme_built_lib: string;
   readme_start_card: string;
   readme_start_text: string;
+  readme_link_about: string;
+  readme_link_projects: string;
+  readme_btn_about: string;
+  readme_btn_projects: string;
+  readme_btn_writing: string;
 
   // PageAbout
   about_bio: string;
@@ -57,10 +95,12 @@ type UIStrings = {
   resume_edu2_text: string;
   resume_refs_text: string;
 
-  // PageProjectDetail
+  // PageProjectsIndex + PageProjectDetail
   project_arch: string;
   project_learnings: string;
   project_links: string;
+  project_read_more: string;
+  project_back_to_list: string;
 
   // PageWritingIndex
   writing_meta_suffix: string;
@@ -84,6 +124,17 @@ type UIStrings = {
 const UI: Record<Locale, UIStrings> = {
   no: {
     sidebar_hint: "Tastatur: ↑/↓ eller J/K for å bla mellom filer",
+    sidebar_file_tree_heading: "· filer",
+    sidebar_shortcuts_heading: "· snarveier",
+    sidebar_close_menu_aria: "lukk meny",
+    sidebar_shortcut_mail: "epost",
+    sidebar_shortcut_resume: "cv",
+    sidebar_shortcut_now: "now",
+
+    topbar_open_menu_aria: "åpne meny",
+    topbar_cycle_tint_title: "bytt fargetone",
+    topbar_switch_to_en_aria: "bytt til engelsk",
+    topbar_switch_to_no_aria: "bytt til norsk",
 
     readme_welcome: "Hei! Velkommen til hjemmesiden min.",
     readme_portfolio: "Denne siden brukes som en portfolio og blogg.",
@@ -95,6 +146,12 @@ const UI: Record<Locale, UIStrings> = {
     readme_built_lib: "et open-source React-bibliotek.",
     readme_start_card: "ANBEFALT STARTPUNKT",
     readme_start_text: "Begynn med",
+    readme_link_about: "hvis du vil vite hvem jeg er, eller",
+    readme_link_projects:
+      "hvis du heller vil se hva jeg holder på med i fritiden min.",
+    readme_btn_about: "Om meg →",
+    readme_btn_projects: "Prosjekter →",
+    readme_btn_writing: "Blogg →",
 
     about_bio: "17 år, avgangselev på VG2 IT ved Tiller VGS.",
     about_hobbies:
@@ -119,6 +176,8 @@ const UI: Record<Locale, UIStrings> = {
     project_arch: "ARKITEKTUR",
     project_learnings: "LÆRINGER",
     project_links: "LENKER",
+    project_read_more: "Les mer →",
+    project_back_to_list: "← Alle prosjekter",
 
     writing_meta_suffix: "sortert sist først",
     writing_lede: "Ofte uferdige notater og småtekster.",
@@ -136,6 +195,17 @@ const UI: Record<Locale, UIStrings> = {
 
   en: {
     sidebar_hint: "Keyboard: ↑/↓ or J/K to navigate files",
+    sidebar_file_tree_heading: "· file tree",
+    sidebar_shortcuts_heading: "· shortcuts",
+    sidebar_close_menu_aria: "close menu",
+    sidebar_shortcut_mail: "mail",
+    sidebar_shortcut_resume: "resume",
+    sidebar_shortcut_now: "now",
+
+    topbar_open_menu_aria: "open menu",
+    topbar_cycle_tint_title: "cycle tint",
+    topbar_switch_to_en_aria: "switch to English",
+    topbar_switch_to_no_aria: "switch to Norwegian",
 
     readme_welcome: "Hi! Welcome to my website.",
     readme_portfolio: "This site serves as a portfolio and blog.",
@@ -147,6 +217,11 @@ const UI: Record<Locale, UIStrings> = {
     readme_built_lib: "an open-source React library.",
     readme_start_card: "GET STARTED",
     readme_start_text: "Start with",
+    readme_link_about: "if you want to know who I am, or",
+    readme_link_projects: "to see what I do in my free time.",
+    readme_btn_about: "About →",
+    readme_btn_projects: "Projects →",
+    readme_btn_writing: "Blog →",
 
     about_bio: "17 years old, graduating IT student at Tiller VGS.",
     about_hobbies:
@@ -172,6 +247,8 @@ const UI: Record<Locale, UIStrings> = {
     project_arch: "ARCHITECTURE",
     project_learnings: "KEY TAKEAWAYS",
     project_links: "LINKS",
+    project_read_more: "Read more →",
+    project_back_to_list: "← All projects",
 
     writing_meta_suffix: "newest first",
     writing_lede: "Often unfinished notes and short texts.",

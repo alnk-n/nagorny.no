@@ -4,7 +4,7 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 
 import Navigation from "./srcl/Navigation";
-import { Locale } from "../locale";
+import { Locale, useT } from "../locale";
 
 type Tint = "" | "tint-green" | "tint-blue" | "tint-yellow" | "tint-pink";
 const TINTS: Tint[] = [
@@ -35,6 +35,7 @@ const TopBar: React.FC<Props> = ({
   onMenu,
 }) => {
   const navigate = useNavigate();
+  const t = useT();
   return (
     <Navigation
       logo={<>~ / akn</>}
@@ -43,7 +44,7 @@ const TopBar: React.FC<Props> = ({
         <button
           className="srcl-logo-like site-menu-btn"
           onClick={onMenu}
-          aria-label="open menu"
+          aria-label={t.topbar_open_menu_aria}
         >
           ≡ menu
         </button>
@@ -52,7 +53,7 @@ const TopBar: React.FC<Props> = ({
         <div style={{ display: "flex", gap: 0 }}>
           <button
             className="srcl-logo-like site-tint-btn"
-            title="cycle tint"
+            title={t.topbar_cycle_tint_title}
             onClick={() =>
               setTint((t) => TINTS[(TINTS.indexOf(t) + 1) % TINTS.length])
             }
@@ -65,7 +66,9 @@ const TopBar: React.FC<Props> = ({
           <button
             className="srcl-logo-like"
             onClick={() => setLocale(locale === "no" ? "en" : "no")}
-            aria-label={locale === "no" ? "switch to English" : "switch to Norwegian"}
+            aria-label={
+              locale === "no" ? t.topbar_switch_to_en_aria : t.topbar_switch_to_no_aria
+            }
           >
             {locale === "no" ? "NO" : "EN"}
           </button>

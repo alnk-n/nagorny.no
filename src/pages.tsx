@@ -15,7 +15,7 @@ import {
   SKILLS,
   WRITING,
 } from "./data";
-import { Locale, useLocale, useT } from "./locale";
+import { Locale, loc, useLocale, useT } from "./locale";
 
 import Badge from "./components/srcl/Badge";
 import BreadCrumbs from "./components/srcl/BreadCrumbs";
@@ -29,11 +29,6 @@ import Window from "./components/srcl/Window";
 import ActionListItem from "./components/srcl/ActionListItem";
 import Accordion from "./components/srcl/Accordion";
 import HoverComponentTrigger from "./components/srcl/HoverComponentTrigger";
-
-// Pick the localized version of a value; fall back to `no` when `en` is absent.
-function loc<T>(locale: Locale, no: T, en: T | undefined): T {
-  return locale === "en" && en !== undefined ? en : no;
-}
 
 const ASCII_HERO = String.raw`
   _   ________   __ ______  __  _____  ________  __
@@ -118,14 +113,6 @@ export function PageReadme() {
   const { locale } = useLocale();
   const hero = useScramble(locale === "en" ? ASCII_HERO_EN : ASCII_HERO);
   const t = useT();
-  const aboutLink =
-    locale === "no"
-      ? "hvis du vil vite hvem jeg er, eller"
-      : "if you want to know who I am, or";
-  const projectsLink =
-    locale === "no"
-      ? "hvis du heller vil se hva jeg holder på med i fritiden min."
-      : "to see what I do in my free time.";
   return (
     <>
       <div className="page-head">
@@ -164,18 +151,19 @@ export function PageReadme() {
 
       <Card title={t.readme_start_card} mode="left">
         <Text>
-          {t.readme_start_text} <Link to="/about.md">about.md</Link> {aboutLink}{" "}
-          <Link to="/projects/">projects/</Link> {projectsLink}
+          {t.readme_start_text} <Link to="/about.md">about.md</Link>{" "}
+          {t.readme_link_about} <Link to="/projects/">projects/</Link>{" "}
+          {t.readme_link_projects}
         </Text>
         <div className="btn-row">
           <Link className="btn-primary" to="/about.md">
-            About →
+            {t.readme_btn_about}
           </Link>
           <Link className="btn-secondary" to="/projects/">
-            Projects →
+            {t.readme_btn_projects}
           </Link>
           <Link className="btn-secondary" to="/writing/">
-            Writing →
+            {t.readme_btn_writing}
           </Link>
         </div>
       </Card>
@@ -380,6 +368,7 @@ github   = ${IDENTITY.github}`}
 
 // ── /projects/ + /projects/<id>.md ─────────────────────────────────────────
 export function PageProjectsIndex() {
+  const t = useT();
   const { locale } = useLocale();
   return (
     <>
@@ -400,7 +389,7 @@ export function PageProjectsIndex() {
             </Text>
             <div className="btn-row">
               <Link className="btn-secondary" to={`/projects/${p.id}.md`}>
-                Les mer →
+                {t.project_read_more}
               </Link>
             </div>
           </Card>
@@ -505,7 +494,7 @@ export function PageProjectDetail({ id }: { id: string }) {
             </a>
           )}
           <Link className="btn-secondary" to="/projects/">
-            ← Alle prosjekter
+            {t.project_back_to_list}
           </Link>
         </div>
       </Card>

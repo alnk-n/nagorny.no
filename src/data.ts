@@ -1,4 +1,10 @@
 // Site-wide content data (placeholder Norwegian filler — swap with real copy).
+//
+// Bilingual fields here use an optional `_en`-suffixed sibling (e.g. `text`/
+// `text_en`), resolved at render time with `loc()` from ../locale, which
+// falls back to the Norwegian field when English is absent. This is content
+// that's often only authored in one language, so it's intentionally looser
+// than locale.ts's UI catalog, which requires both locales for every key.
 
 import goalsRaw from "./data/goals.json";
 import nowRaw from "./data/now.json";

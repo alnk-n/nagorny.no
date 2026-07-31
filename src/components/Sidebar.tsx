@@ -27,11 +27,11 @@ const Sidebar: React.FC<Props> = ({ path, navigate, onPickAny, onClose }) => {
   return (
     <>
       <div className="site-aside-head">
-        <h3>· file tree</h3>
+        <h3>{t.sidebar_file_tree_heading}</h3>
         <button
           className="site-aside-close"
           onClick={onClose}
-          aria-label="close menu"
+          aria-label={t.sidebar_close_menu_aria}
         >
           [ × ]
         </button>
@@ -110,10 +110,10 @@ const Sidebar: React.FC<Props> = ({ path, navigate, onPickAny, onClose }) => {
       <div style={{ height: "1.25rem" }} />
       <Divider />
 
-      <h3>· shortcuts</h3>
+      <h3>{t.sidebar_shortcuts_heading}</h3>
       <div className="shortcuts-list">
         <ActionListItem icon="↑" href={`mailto:${IDENTITY.email}`}>
-          mail
+          {t.sidebar_shortcut_mail}
         </ActionListItem>
         <ActionListItem
           icon="↗"
@@ -122,10 +122,10 @@ const Sidebar: React.FC<Props> = ({ path, navigate, onPickAny, onClose }) => {
           github
         </ActionListItem>
         <ActionListItem icon="↗" onClick={go("/resume.txt")}>
-          resume
+          {t.sidebar_shortcut_resume}
         </ActionListItem>
         <ActionListItem icon="↗" onClick={go("/now.log")}>
-          now
+          {t.sidebar_shortcut_now}
         </ActionListItem>
       </div>
 
