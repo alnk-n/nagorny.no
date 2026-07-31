@@ -2,21 +2,45 @@
   {
     "text": "Forbereder meg til tverrfaglig eksamen i utvikling & drift.",
     "text_en": "Preparing for the cross-disciplinary exam in development & operations.",
-    "createdAt": "2026-05-24"
+    "createdAt": "2026-05-24",
+    "archivedAt": "2026-07-29"
   },
   {
     "text": "Migrerer Ubuntu-serveren min til en Proxmox-installasjon.",
     "text_en": "Migrating my Ubuntu server to a Proxmox installation.",
-    "createdAt": "2026-05-24"
+    "createdAt": "2026-05-24",
+    "archivedAt": "2026-07-29"
   },
   {
     "text": "Utvikler og tester denne nettsiden.",
     "text_en": "Developing and testing this website.",
-    "createdAt": "2026-05-24"
+    "createdAt": "2026-05-24",
+    "archivedAt": "2026-07-29"
   },
   {
     "text": "Jobber på et Bash-skript som automatiserer formatering av minnepenner med Ventoy2Disk.",
     "text_en": "Working on a Bash script that automates formatting USB drives with Ventoy2Disk.",
-    "createdAt": "2026-05-24"
+    "createdAt": "2026-05-24",
+    "archivedAt": "2026-07-29"
+  },
+  {
+    "text": "Ferdigstiller den første versjonen av homelab-wikien min.",
+    "text_en": "Polishing the first rendition of my homelab wiki.",
+    "createdAt": "2026-07-30"
+  },
+  {
+    "text": "Forbereder meg til oppkjøringen min.",
+    "text_en": "Preparing for my driving exam.",
+    "createdAt": "2026-07-30"
+  },
+  {
+    "text": "Utforsker digitale sikkerhetstiltak (FIDO2, GPG/PGP-nøkler, TLS-kryptering osv.).",
+    "text_en": "Exploring digital security measures (FIDO2, GPG/PGP keys, TLS-encryption etc.).",
+    "createdAt": "2026-07-30"
+  },
+  {
+    "text": "Planlegger Ubuntu -> Proxmox-migrasjonen min.",
+    "text_en": "Planning my Ubuntu -> Proxmox migration.",
+    "createdAt": "2026-07-30"
   }
 ]
