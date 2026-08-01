@@ -357,7 +357,8 @@ export const EDUCATION = [
   {
     period: "2021-2024",
     period_en: "2021-2024",
-    what: "Sverresborg Ungdomsskole · 8-10. klasse",
-    what_en: "Sverresborg Lower Secondary School · 8th-10th grade",
+    what: "Sverresborg Ungdomsskole · 8-10. klasse (Programmeringsvalgfag)",
+    what_en:
+      "Sverresborg Middle School · 8th-10th grade (Programming elective)",
   },
 ];
