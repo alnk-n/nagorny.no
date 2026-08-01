@@ -231,8 +231,8 @@ export const SKILLS = [
     items: [
       {
         name: "Linux",
-        desc: "Primær-OS for personlig bruk",
-        desc_en: "Primary OS for personal use",
+        desc: "Erfaring med Debian, Ubuntu og Fedora",
+        desc_en: "Experience with Debian, Ubuntu and Fedora",
       },
       {
         name: "Docker",
