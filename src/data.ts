@@ -288,11 +288,13 @@ export const SKILLS = [
     items: [
       {
         name: "Kabelterminering",
+        name_en: "Cable termination",
         desc: "RJ45-crimping og ryddig kabelføring",
         desc_en: "RJ45 crimping and cable management",
       },
       {
         name: "Elektronikkreparasjon",
+        name_en: "Electronics repair",
         desc: "Reparasjon og vedlikehold av elektroniske enheter",
         desc_en: "Repair and maintenance of electronic devices",
       },

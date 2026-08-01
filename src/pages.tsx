@@ -208,7 +208,7 @@ export function PageAbout() {
           skills: SKILLS.map((g) => ({
             group: loc(locale, g.group, g.group_en),
             items: g.items.map((it) => ({
-              name: it.name,
+              name: loc(locale, it.name, it.name_en),
               desc: loc(locale, it.desc, it.desc_en),
             })),
           })),
@@ -250,7 +250,7 @@ export function PageAbout() {
                   key={it.name}
                   text={loc(locale, it.desc, it.desc_en)}
                 >
-                  <Badge>{it.name}</Badge>
+                  <Badge>{loc(locale, it.name, it.name_en)}</Badge>
                 </HoverComponentTrigger>
               ))}
             </div>
